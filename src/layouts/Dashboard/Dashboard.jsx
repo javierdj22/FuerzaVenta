@@ -16,7 +16,7 @@ import dashboardRoutes from "routes/dashboard.jsx";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/layouts/dashboardStyle.jsx";
 
-import image from "assets/img/FondoLogin.png";
+import image from "assets/img/FondoMenu.png";
 import logo from "assets/img/Icono.png";
 
 const switchRoutes = (

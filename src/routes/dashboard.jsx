@@ -70,7 +70,7 @@ const dashboardRoutes = [
     path: "/upgrade-to-pro",
     sidebarName: "Upgrade To PRO",
     navbarName: "Upgrade To PRO",
-    icon: Unarchive,
+    icon: Unarchive, 
     component: UpgradeToPro
   },*/
   { redirect: true, path: "/", to: "/dashboard", navbarName: "Redirect" }

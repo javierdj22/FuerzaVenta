@@ -1,18 +1,17 @@
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
-import ContentPaste from "@material-ui/icons/ContentPaste";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
 import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
 // core components/views
+import Centros from "views/Centros/Centros.jsx";
 import DashboardPage from "views/Dashboard/Dashboard.jsx";
-import UserProfile from "views/UserProfile/UserProfile.jsx";
-import TableList from "views/TableList/TableList.jsx";
-import Typography from "views/Typography/Typography.jsx";
-import Icons from "views/Icons/Icons.jsx";
+import Usuarios from "views/Usuarios/Usuarios.jsx";
+import Tradicional from "views/Tradicional/Tradicional.jsx";
+import Still from "views/Still/Still.jsx";
 import Maps from "views/Maps/Maps.jsx";
 import NotificationsPage from "views/Notifications/Notifications.jsx";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.jsx";
@@ -20,39 +19,39 @@ import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.jsx";
 const dashboardRoutes = [
   {
     path: "/dashboard",
-    sidebarName: "Dashboard",
-    navbarName: "Material Dashboard",
+    sidebarName: "Simulador de pago",
+    navbarName: "Configuracion",
     icon: Dashboard,
     component: DashboardPage
   },
   {
-    path: "/user",
-    sidebarName: "User Profile",
-    navbarName: "Profile",
+    path: "/centros",
+    sidebarName: "Centros",
+    navbarName: "Lista de Centros",
     icon: Person,
-    component: UserProfile
+    component: Centros
   },
   {
-    path: "/table",
-    sidebarName: "Table List",
-    navbarName: "Table List",
-    icon: ContentPaste,
-    component: TableList
+    path: "/Usuarios",
+    sidebarName: "Usuarios",
+    navbarName: "Lista de Usuarios",
+    icon: Person,
+    component: Usuarios
   },
   {
-    path: "/typography",
-    sidebarName: "Typography",
-    navbarName: "Typography",
+    path: "/Tradicional",
+    sidebarName: "Tradicional",
+    navbarName: "Parametro Tradicional",
     icon: LibraryBooks,
-    component: Typography
+    component: Tradicional
   },
   {
-    path: "/icons",
-    sidebarName: "Icons",
-    navbarName: "Icons",
+    path: "/Still",
+    sidebarName: "Still",
+    navbarName: "Parametro Still",
     icon: BubbleChart,
-    component: Icons
-  },
+    component: Still
+  },/*
   {
     path: "/maps",
     sidebarName: "Maps",
@@ -73,7 +72,7 @@ const dashboardRoutes = [
     navbarName: "Upgrade To PRO",
     icon: Unarchive,
     component: UpgradeToPro
-  },
+  },*/
   { redirect: true, path: "/", to: "/dashboard", navbarName: "Redirect" }
 ];
 

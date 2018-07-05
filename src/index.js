@@ -5,7 +5,7 @@ import { Router, Route, Switch } from "react-router-dom";
 
 import "assets/css/material-dashboard-react.css?v=1.3.0";
 
-import indexRoutes from "routes/index.jsx";
+import indexRoutes from "routes/index.jsx"; 
 
 const hist = createBrowserHistory();
 

@@ -1,7 +1,9 @@
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Person from "@material-ui/icons/Person";
-import LibraryBooks from "@material-ui/icons/LibraryBooks";
+import MonetizationOn from "@material-ui/icons/MonetizationOn";
+import Business from "@material-ui/icons/Business";
+import People from "@material-ui/icons/People"
+import ViewHeadline from "@material-ui/icons/ViewHeadline";
+import FormatListBulleted from "@material-ui/icons/FormatListBulleted";
 import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
 import Notifications from "@material-ui/icons/Notifications";
@@ -21,35 +23,35 @@ const dashboardRoutes = [
     path: "/dashboard",
     sidebarName: "Simulador de pago",
     navbarName: "Configuracion",
-    icon: Dashboard,
+    icon: MonetizationOn,
     component: DashboardPage
   },
   {
     path: "/centros",
     sidebarName: "Centros",
     navbarName: "Lista de Centros",
-    icon: Person,
+    icon: Business,
     component: Centros
   },
   {
     path: "/Usuarios",
     sidebarName: "Usuarios",
     navbarName: "Lista de Usuarios",
-    icon: Person,
+    icon: People,
     component: Usuarios
   },
   {
     path: "/Tradicional",
     sidebarName: "Tradicional",
     navbarName: "Parametro Tradicional",
-    icon: LibraryBooks,
+    icon: ViewHeadline,
     component: Tradicional
   },
   {
     path: "/Still",
     sidebarName: "Still",
     navbarName: "Parametro Still",
-    icon: BubbleChart,
+    icon: FormatListBulleted,
     component: Still
   },/*
   {

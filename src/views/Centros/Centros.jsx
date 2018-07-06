@@ -51,7 +51,7 @@ function Centros(props) {
               Here is a subtitle for this table
             </p>
           </CardHeader>
-          <CardBody>
+          <CardBody> 
             <Table
               tableHeaderColor="primary"
               tableHead={["Name", "Country", "City", "Salary"]}

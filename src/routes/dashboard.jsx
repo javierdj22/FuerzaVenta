@@ -3,18 +3,12 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
-import LocationOn from "@material-ui/icons/LocationOn";
-import Notifications from "@material-ui/icons/Notifications";
-import Unarchive from "@material-ui/icons/Unarchive";
 // core components/views
 import Centros from "views/Centros/Centros.jsx";
 import DashboardPage from "views/Dashboard/Dashboard.jsx";
 import Usuarios from "views/Usuarios/Usuarios.jsx";
 import Tradicional from "views/Tradicional/Tradicional.jsx";
 import Still from "views/Still/Still.jsx";
-import Maps from "views/Maps/Maps.jsx";
-import NotificationsPage from "views/Notifications/Notifications.jsx";
-import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.jsx";
 
 const dashboardRoutes = [
   {

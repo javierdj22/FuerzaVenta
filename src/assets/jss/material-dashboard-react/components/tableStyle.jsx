@@ -42,17 +42,20 @@ const tableStyle = theme => ({
   tableHeadCell: {
     color: "inherit",
     ...defaultFont,
-    fontSize: "1em"
+    fontSize: "1.2em",
+    fontweight:"400"
+
   },
   tableCell: {
     ...defaultFont,
     lineHeight: "1.42857143",
-    padding: "12px 8px",
-    verticalAlign: "middle"
+    padding: "0px 8px",
+    verticalAlign: "middle",
+
   },
   tableResponsive: {
     width: "100%",
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 2,
     overflowX: "auto"
   }
 });

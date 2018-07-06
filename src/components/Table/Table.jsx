@@ -19,7 +19,7 @@ function CustomTable({ ...props }) {
           <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
             <TableRow>
               {tableHead.map((prop, key) => {
-                return (
+                return ( 
                   <TableCell
                     className={classes.tableCell + " " + classes.tableHeadCell}
                     key={key}

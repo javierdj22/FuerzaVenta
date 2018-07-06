@@ -2,12 +2,15 @@ import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
+import Search from "@material-ui/icons/Search";
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
 import Table from "components/Table/Table.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import CustomInput from "components/CustomInput/CustomInput.jsx";
+import Button from "components/CustomButtons/Button.jsx";
 
 const styles = {
   cardCategoryWhite: {
@@ -46,15 +49,25 @@ function Centros(props) {
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Simple Table</h4>
-            <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p>
+              <CustomInput
+                formControlProps={{
+                  className: classes.margin + " " + classes.search
+                }}
+                inputProps={{
+                  placeholder: "Buscar Centros",
+                  inputProps: {
+                    "aria-label": "Search"
+                  }
+                }}
+              />
+              <Button color="white" aria-label="edit" justIcon round>
+                <Search />
+              </Button>
           </CardHeader>
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Name", "Country", "City", "Salary"]}
+              tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", ""]}
               tableData={[
                 ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
                 ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],

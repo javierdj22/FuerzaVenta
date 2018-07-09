@@ -8,6 +8,7 @@ import Table from "components/Table/Table.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import Axios from "components/Axios/Axios.jsx";
 
 const styles = {
   cardCategoryWhite: {
@@ -50,20 +51,11 @@ function Centros(props) {
             <p className={classes.cardCategoryWhite}>
               Here is a subtitle for this table
             </p>
+            Axios
           </CardHeader>
           <CardBody> 
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", ""]}
-              tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-                ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-                ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-                ["Mason Porter", "Chile", "Gloucester", "$78,615"]
-              ]}
-            />
+            <Axios> 
+            </Axios> 
           </CardBody>
         </Card>
       </GridItem>

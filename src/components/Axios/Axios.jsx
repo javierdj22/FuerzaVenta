@@ -45,9 +45,10 @@ class PersonList extends React.Component {
         Credentials: true 
       };
     //axios.get(`http://red.lindley.pe/fvcdaapi/api/Centro/Listar/3`, config)
-    axios.get(`http://192.168.80.254:8080/api/Centro/Listar/3`, config)
+    //axios.get(`http://192.168.80.254:8080/api/Centro/Listar/3`, config)
+    axios.get('https://jsonplaceholder.typicode.com/users', config)
     .then(res => { 
-        const persons = res.data.Data;
+        const persons = res.data;//.Data;
         this.setState({ persons });
         console.log(res);  
     }) 
@@ -64,15 +65,15 @@ class PersonList extends React.Component {
             tableHeaderColor="primary"
             tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", ""]}
             tableData={
-            this.state.persons.map(persons =>[persons.Nombre, persons.Codigo, persons.FechaRegistro, 
+            this.state.persons.map(persons =>[persons.name, persons.username, persons.email, 
             <Tooltip
                 id="tooltip-top"
-                title={"Estado" + persons.Codigo}
+                title={"Estado" + persons.username}
                 placement="top"
                 classes={{ tooltip: classes.tooltip }}
             >
                 <Checkbox
-                checked={persons.Activo}
+                checked={persons.id}
                 tabIndex={-1}
                 onClick={this.handleToggle(1)}
                 checkedIcon={<Check className={classes.checkedIcon} />}

@@ -5,10 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
+            "type": "chrome",
             "request": "launch",
-            "name": "Iniciar programa",
-            "program": "${workspaceFolder}\\index.js"
+            "name": "Fuerza de Venta ohhh yeahh",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}\\index.js"
         }
     ]
 }

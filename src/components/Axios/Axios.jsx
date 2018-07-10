@@ -19,7 +19,7 @@ class PersonList extends React.Component {
       checked: this.props.checkedIndexes,
       persons: []
     };
-    
+
   handleToggle = persons => () => {
     const { checked } = this.state;
     const currentIndex = checked.indexOf(persons.Codigo);
@@ -45,7 +45,7 @@ class PersonList extends React.Component {
         Credentials: true 
       };
     //axios.get(`http://red.lindley.pe/fvcdaapi/api/Centro/Listar/3`, config)
-    axios.get(`http://localhost:51238/api/Centro/Listar/3`, config)
+    axios.get(`http://192.168.80.254:8080/api/Centro/Listar/3`, config)
     .then(res => { 
         const persons = res.data.Data;
         this.setState({ persons });

@@ -22,7 +22,7 @@ class PersonList extends React.Component {
 
   handleToggle = persons => () => {
     const { checked } = this.state;
-    const currentIndex = checked.indexOf(persons.Codigo);
+    const currentIndex = checked.indexOf(1);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
@@ -65,16 +65,23 @@ class PersonList extends React.Component {
             tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", ""]}
             tableData={
             this.state.persons.map(persons =>[persons.Nombre, persons.Codigo, persons.FechaRegistro, 
-            <Checkbox
-              checked={persons.Activo}
-              tabIndex={-1}
-              onClick={this.handleToggle(persons.Codigo)}
-              checkedIcon={<Check className={classes.checkedIcon} />}
-              icon={<Check className={classes.uncheckedIcon} />}
-              classes={{
-                checked: classes.checked
-              }}
-            />,
+            <Tooltip
+                id="tooltip-top"
+                title={"Estado" + persons.Codigo}
+                placement="top"
+                classes={{ tooltip: classes.tooltip }}
+            >
+                <Checkbox
+                checked={persons.Activo}
+                tabIndex={-1}
+                onClick={this.handleToggle(1)}
+                checkedIcon={<Check className={classes.checkedIcon} />}
+                icon={<Check className={classes.uncheckedIcon} />}
+                classes={{
+                    checked: classes.checked
+                }}
+                />
+            </Tooltip>,
             <Tooltip
               id="tooltip-top"
               title="Edit Task"

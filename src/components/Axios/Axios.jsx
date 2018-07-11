@@ -9,10 +9,12 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import tasksStyle from "assets/jss/material-dashboard-react/components/tasksStyle.jsx";
+import EditarModal from "components/Modals/EditarCentro.jsx";
 
 import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import Check from "@material-ui/icons/Check";
+import EditarCentro from '../Modals/EditarCentro';
 
 class PersonList extends React.Component {
     state = {
@@ -58,9 +60,15 @@ class PersonList extends React.Component {
     })
   } 
 
+  handleClick() {
+    console.log('this is:', this.id);
+    
+  }
+
   render() { 
     const { classes, tasksIndexes, tasks } = this.props;
     return (
+      
         <Table
             tableHeaderColor="primary"
             tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", ""]}
@@ -85,24 +93,27 @@ class PersonList extends React.Component {
             </Tooltip>,
             <Tooltip
               id="tooltip-top"
-              title="Edit Task"
+              title="Editar"
               placement="top"
               classes={{ tooltip: classes.tooltip }}
             >
               <IconButton
-                aria-label="Edit"
+                aria-label="Edit"                
                 className={classes.tableActionButton}
+                id={persons.id}
+                onClick={(e) => this.handleClick(e)}
               >
-                <Edit
+                <Edit                  
                   className={
                     classes.tableActionButtonIcon + " " + classes.edit
                   }
+                  
                 />
               </IconButton>
             </Tooltip>,
             <Tooltip
                 id="tooltip-top-start"
-                title="Remove"
+                title="Eliminar"
                 placement="top"
                 classes={{ tooltip: classes.tooltip }}
             >

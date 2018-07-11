@@ -7,7 +7,9 @@ import PropTypes from "prop-types";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
+import IconButton from "@material-ui/core/IconButton";
 import ReactModal from 'react-modal';
+import Edit from "@material-ui/icons/Edit";
 
 const customStyles = {
     content : {
@@ -24,7 +26,10 @@ class App extends React.Component{
     constructor(){
         super();
 
-        this.state = { modalIsOpen: true };
+        this.state = { 
+            modalIsOpen : false, 
+            clasess : this.props
+        };
       
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -46,7 +51,20 @@ class App extends React.Component{
     }
 
     render(){
+        const { classes, Idresultado } = this.props;
         return (
+            <IconButton
+              aria-label="Edit"                
+              className={classes.tableActionButton}
+              id={Idresultado}
+              onClick={this.openModal}
+            >
+              <Edit                  
+                className={
+                    classes.tableActionButtonIcon + " " + classes.edit
+                }
+              />
+            </IconButton>,
             <ReactModal>
                 <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
                 <button onClick={this.closeModal}>close</button>
@@ -62,5 +80,10 @@ class App extends React.Component{
         );
     }
 }
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+  Idresultado: PropTypes.number
+};
+
 
 export default withStyles(customStyles)(App);

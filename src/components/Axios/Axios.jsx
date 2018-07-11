@@ -60,13 +60,13 @@ class PersonList extends React.Component {
     })
   } 
 
-  handleClick() {
-    console.log('this is:', this.id);
+  handleClick = persons => () => {
+    console.log('this is:', persons.username + ' ' + persons.id);
     
   }
 
   render() { 
-    const { classes, tasksIndexes, tasks } = this.props;
+    const { classes } = this.props;
     return (
       
         <Table
@@ -97,20 +97,9 @@ class PersonList extends React.Component {
               placement="top"
               classes={{ tooltip: classes.tooltip }}
             >
-              <IconButton
-                aria-label="Edit"                
-                className={classes.tableActionButton}
-                id={persons.id}
-                onClick={(e) => this.handleClick(e)}
-              >
-                <Edit                  
-                  className={
-                    classes.tableActionButtonIcon + " " + classes.edit
-                  }
-                  
-                />
-              </IconButton>
-            </Tooltip>,
+              <EditarModal Idresultado={persons.id} />
+            </Tooltip>
+            ,
             <Tooltip
                 id="tooltip-top-start"
                 title="Eliminar"

@@ -21,6 +21,8 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
+import Button from "components/CustomButtons/Button.jsx";
+import CustomInput from "components/CustomInput/CustomInput.jsx";
 
 Modal.setAppElement("#root");
 
@@ -47,7 +49,8 @@ class App extends React.Component{
 
     afterOpenModal() {
         // references are now sync'd and can be accessed.
-        this.subtitle.style.color = '#d9012e';
+        // this.subtitle.style.color = '#d9012e';
+        
     }
 
     closeModal() {
@@ -93,18 +96,40 @@ class App extends React.Component{
                                 <CardBody> 
                                     <Grid container> 
                                         <GridItem xs={6} sm={6} md={6}>
-                                            <h4 ref={subtitle => this.subtitle = subtitle}>Codigo</h4>
-                                            <input />   
+                                            {/* <h4 ref={subtitle => this.subtitle = subtitle}>Codigo</h4> */}
+                                            <CustomInput
+                                                labelText="Codigo"
+                                                id="codigo"
+                                                formControlProps={{
+                                                    fullWidth: true
+                                                }}
+                                            />
                                         </GridItem>
                                         <GridItem xs={6} sm={6} md={6}>
-                                            <h4 ref={subtitle => this.subtitle = subtitle}>Nombre</h4>
-                                            <input />   
+                                            {/* <h4 ref={subtitle => this.subtitle = subtitle}>Nombre</h4> */}
+                                            <CustomInput
+                                                labelText="Nombre"
+                                                id="nombre"
+                                                formControlProps={{
+                                                    fullWidth: true
+                                                }}
+                                            />
                                         </GridItem>
                                     </Grid>            
                                 </CardBody>
-                                <CardFooter>                     
-                                    <button onClick={this.closeModal}>Aceptar</button>
-                                    <button>Cancelar</button>
+                                <CardFooter>
+                                    <Button                                        
+                                        color="danger"
+                                        onClick={this.closeModal}
+                                    >
+                                        Cancelar
+                                    </Button>
+                                    <Button                                        
+                                        color="primary"
+                                        onClick={this.closeModal}
+                                    >
+                                        Aceptar
+                                    </Button>
                                 </CardFooter>
                             </Card>
                         </GridItem>

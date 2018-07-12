@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import axios from 'axios';
 import Table from "components/Table/Table.jsx";
-import buttonStyle from "assets/jss/material-dashboard-react/components/buttonStyle.jsx";
+
 import Checkbox from "@material-ui/core/Checkbox";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -71,7 +71,7 @@ class PersonList extends React.Component {
       
         <Table
             tableHeaderColor="primary"
-            tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", ""]}
+            tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", "", ""]}
             tableData={
             this.state.persons.map(persons =>[persons.name, persons.username, persons.email, 
             <Tooltip
@@ -91,8 +91,7 @@ class PersonList extends React.Component {
                 }}
                 />
             </Tooltip>,
-            <EditarModal Idresultado={persons.id} />
-            ,
+            <EditarModal Idresultado={persons.id} />,
             <Tooltip
                 id="tooltip-top-start"
                 title="Eliminar"

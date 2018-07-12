@@ -8,12 +8,12 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
 import IconButton from "@material-ui/core/IconButton";
-import ReactModal from 'react-modal';
+import Modal from 'react-modal';
 import Edit from "@material-ui/icons/Edit";
 import Tooltip from "@material-ui/core/Tooltip";
 import tasksStyle from "assets/jss/material-dashboard-react/components/tasksStyle.jsx";
 
-ReactModal.setAppElement("#root");
+Modal.setAppElement("#root");
 
 class App extends React.Component{
     constructor(props){
@@ -68,7 +68,7 @@ class App extends React.Component{
                             />
                         </IconButton>                    
                 </Tooltip>
-                <ReactModal
+                <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
@@ -78,7 +78,7 @@ class App extends React.Component{
 
                     <h2 ref={subtitle => this.subtitle = subtitle}>Hello {Idresultado} </h2>
                     <button onClick={this.closeModal}>close</button>
-                    <div>I am a modal</div>
+                    <div>hOLA Mundo</div>
                     <form>
                         <input />
                         <button>tab navigation</button>
@@ -86,7 +86,7 @@ class App extends React.Component{
                         <button>inside</button>
                         <button>the modal</button>
                     </form>
-                </ReactModal> 
+                </Modal> 
             </div>                                     
         );
     }

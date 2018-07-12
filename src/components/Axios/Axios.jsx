@@ -91,14 +91,7 @@ class PersonList extends React.Component {
                 }}
                 />
             </Tooltip>,
-            <Tooltip
-              id="tooltip-top"
-              title="Editar"
-              placement="top"
-              classes={{ tooltip: classes.tooltip }}
-            >
-              <EditarModal Idresultado={persons.id} />
-            </Tooltip>
+            <EditarModal Idresultado={persons.id} />
             ,
             <Tooltip
                 id="tooltip-top-start"

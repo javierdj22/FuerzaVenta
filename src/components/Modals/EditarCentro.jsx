@@ -38,14 +38,9 @@ class App extends React.Component{
         this.closeModal = this.closeModal.bind(this);
     }
 
-    openModal() 
+    openModal = recibe => () =>
     {
-        this.setState({modalIsOpen: true});
-    }
-
-    handleToggle = variable => () =>{
-        console.log(variable);
-
+        console.log(recibe)
         this.setState({modalIsOpen: true});
     }
 
@@ -63,31 +58,32 @@ class App extends React.Component{
         return (
             <div>
                 <Tooltip
-                id="tooltip-top"
-                title="Editar"
-                placement="top"
-                classes={{ tooltip: classes.tooltip }}
-                >             
-                    <IconButton
-                        aria-label="Edit"                
-                        className={classes.tableActionButton}
-                        id={Idresultado}
-                        onClick={this.handleToggle(Idresultado)}
-                        >
-                        <Edit                  
-                            className={
-                                classes.tableActionButtonIcon + " " + classes.edit
-                            }
-                        />
-                    </IconButton>                    
+                    id="tooltip-top"
+                    title="Editar"
+                    placement="top"
+                    classes={{ tooltip: classes.tooltip }}
+                    >             
+                        <IconButton
+                            aria-label="Edit"                
+                            className={classes.tableActionButton}
+                            id={Idresultado}
+                            onClick={this.openModal(Idresultado)}
+                            >
+                            <Edit                  
+                                className={
+                                    classes.tableActionButtonIcon + " " + classes.edit
+                                }
+                            />
+                        </IconButton>                    
                 </Tooltip>
                 <ReactModal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     style={customStyles}
-                    contentLabel={"Example Modal " + Idresultado}
+                    contentLabel={"Modal de edicion " + Idresultado}
                     >
+
                     <h2 ref={subtitle => this.subtitle = subtitle}>Hello {Idresultado} </h2>
                     <button onClick={this.closeModal}>close</button>
                     <div>I am a modal</div>
@@ -103,6 +99,7 @@ class App extends React.Component{
         );
     }
 }
-ReactModal.setAppElement('#root');
+
+ReactModal.setAppElement(document.getElementById("root"));
 
 export default withStyles(customStyles)(App);

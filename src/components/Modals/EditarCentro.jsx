@@ -73,7 +73,6 @@ class App extends React.Component{
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     style={tasksStyle}
-                    closeTimeoutMS='4000'
                     contentLabel={"Modal de edicion " + Idresultado}
                     >
 

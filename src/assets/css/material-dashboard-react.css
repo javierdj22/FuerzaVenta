@@ -38,6 +38,7 @@
 
 .ct-label {
     color: rgba(255, 255, 255, 0.7);
+    z-index: 3;
 }
 
 .ct-chart-line .ct-label, .ct-chart-bar .ct-label {
@@ -139,7 +140,9 @@ legend {
 *:focus {
     outline: 0;
 }
-
+.ReactModal__Overlay{
+    z-index: 3;
+}
 a:focus, a:active,
 button:active, button:focus, button:hover,
 button::-moz-focus-inner,

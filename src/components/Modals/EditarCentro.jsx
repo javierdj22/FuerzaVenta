@@ -19,6 +19,8 @@ import GridItem from "components/Grid/GridItem.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import CardFooter from "components/Card/CardFooter.jsx";
+
 
 Modal.setAppElement("#root");
 
@@ -82,23 +84,28 @@ class App extends React.Component{
                     style={tasksStyle}
                     contentLabel={"Modal de edicion " + Idresultado}
                     >
-                    <Grid container>
+                    <Grid container> 
                         <GridItem xs={12} sm={12} md={12}>
                             <Card plain>
                                 <CardHeader plain color="primary">
-                                    <h4 className={classes.cardTitleWhite}>Centro : </h4>
-                                    <p className={classes.cardCategoryWhite}>
-                                    Here is a subtitle for this table
-                                    </p>
+                                    <p className={classes.cardTitleWhite}>Modificar Centro : </p>
                                 </CardHeader>
                                 <CardBody> 
-                                    <h2 ref={subtitle => this.subtitle = subtitle}>Hello {Idresultado} </h2>
-                                    <form>
-                                        <input />                        
-                                        <button onClick={this.closeModal}>close</button>
-                                        <button>the modal</button>
-                                    </form>
+                                    <Grid container> 
+                                        <GridItem xs={6} sm={6} md={6}>
+                                            <h4 ref={subtitle => this.subtitle = subtitle}>Codigo</h4>
+                                            <input />   
+                                        </GridItem>
+                                        <GridItem xs={6} sm={6} md={6}>
+                                            <h4 ref={subtitle => this.subtitle = subtitle}>Nombre</h4>
+                                            <input />   
+                                        </GridItem>
+                                    </Grid>            
                                 </CardBody>
+                                <CardFooter>                     
+                                    <button onClick={this.closeModal}>Aceptar</button>
+                                    <button>Cancelar</button>
+                                </CardFooter>
                             </Card>
                         </GridItem>
                     </Grid>                    

@@ -49,7 +49,8 @@ const tasksStyle = {
     boxShadow: "none"
   },
   overlay : {
-    zIndex : 11
+    zIndex : 11,
+    backgroundColor : 'rgba(000, 000, 000, 0.75)',
   },
   content : {
     top                   : '50%',
@@ -57,6 +58,7 @@ const tasksStyle = {
     right                 : '50%',
     bottom                : 'auto',
     marginRight           : '-50%',
+    padding               : '0px',
     transform             : 'translate(-50%, -50%)',
   }
 };

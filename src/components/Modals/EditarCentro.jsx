@@ -23,11 +23,12 @@ const customStyles = {
   };
 
 class App extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = { 
-            modalIsOpen : false, 
+            modalIsOpen : false,
+            Idresultado : "",
             clasess : this.props
         };
       
@@ -38,6 +39,12 @@ class App extends React.Component{
 
     openModal() 
     {
+        this.setState({modalIsOpen: true});
+    }
+
+    handleToggle = variable => () =>{
+        console.log(variable);
+
         this.setState({modalIsOpen: true});
     }
 
@@ -53,37 +60,34 @@ class App extends React.Component{
     render(){
         const { classes, Idresultado } = this.props;
         return (
-            <IconButton
-              aria-label="Edit"                
-              className={classes.tableActionButton}
-              id={Idresultado}
-              onClick={this.openModal}
-            >
-              <Edit                  
-                className={
-                    classes.tableActionButtonIcon + " " + classes.edit
-                }
-              />
-            </IconButton>,
-            <ReactModal>
-                <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
-                <button onClick={this.closeModal}>close</button>
-                <div>I am a modal</div>
-                <form>
-                    <input />
-                    <button>tab navigation</button>
-                    <button>stays</button>
-                    <button>inside</button>
-                    <button>the modal</button>
-                </form>
+            <div>
+                <IconButton
+                aria-label="Edit"                
+                className={classes.tableActionButton}
+                id={Idresultado}
+                onClick={this.handleToggle(Idresultado)}
+                >
+                <Edit                  
+                    className={
+                        classes.tableActionButtonIcon + " " + classes.edit
+                    }
+                />
+                </IconButton>
+                <ReactModal>
+                    <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
+                    <button onClick={this.closeModal}>close</button>
+                    <div>I am a modal</div>
+                    <form>
+                        <input />
+                        <button>tab navigation</button>
+                        <button>stays</button>
+                        <button>inside</button>
+                        <button>the modal</button>
+                    </form>
             </ReactModal>
+            </div>           
         );
     }
 }
-App.propTypes = {
-  classes: PropTypes.object.isRequired,
-  Idresultado: PropTypes.number
-};
-
 
 export default withStyles(customStyles)(App);

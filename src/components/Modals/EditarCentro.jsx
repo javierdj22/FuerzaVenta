@@ -11,17 +11,9 @@ import IconButton from "@material-ui/core/IconButton";
 import ReactModal from 'react-modal';
 import Edit from "@material-ui/icons/Edit";
 import Tooltip from "@material-ui/core/Tooltip";
+import tasksStyle from "assets/jss/material-dashboard-react/components/tasksStyle.jsx";
 
-const customStyles = {
-    content : {
-      top                   : '50%',
-      left                  : '50%',
-      right                 : 'auto',
-      bottom                : 'auto',
-      marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)'
-    }
-  };
+ReactModal.setAppElement("#root");
 
 class App extends React.Component{
     constructor(props){
@@ -80,7 +72,8 @@ class App extends React.Component{
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
-                    style={customStyles}
+                    style={tasksStyle}
+                    closeTimeoutMS='4000'
                     contentLabel={"Modal de edicion " + Idresultado}
                     >
 
@@ -100,6 +93,6 @@ class App extends React.Component{
     }
 }
 
-ReactModal.setAppElement(document.getElementById("root"));
 
-export default withStyles(customStyles)(App);
+
+export default withStyles(tasksStyle)(App);

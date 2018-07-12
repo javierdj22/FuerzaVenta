@@ -140,9 +140,9 @@ legend {
 *:focus {
     outline: 0;
 }
-.ReactModal__Overlay{
+/* .ReactModal__Overlay{
     z-index: 3;
-}
+} */
 a:focus, a:active,
 button:active, button:focus, button:hover,
 button::-moz-focus-inner,

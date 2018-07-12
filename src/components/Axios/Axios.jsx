@@ -18,25 +18,25 @@ import EditarCentro from '../Modals/EditarCentro';
 
 class PersonList extends React.Component {
     state = {
-      checked: this.props.checkedIndexes,
+    //   checked: this.props.checkedIndexes,
       persons: []
     };
 
-  handleToggle = persons => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(1);
-    const newChecked = [...checked];
+//   handleToggle = persons => () => {
+//     const { checked } = this.state;
+//     const currentIndex = checked.indexOf(1);
+//     const newChecked = [...checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(persons.Codigo);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+//     if (currentIndex === -1) {
+//       newChecked.push(persons.Codigo);
+//     } else {
+//       newChecked.splice(currentIndex, 1);
+//     }
 
-    this.setState({
-      checked: newChecked
-    });
-  };
+//     this.setState({
+//       checked: newChecked
+//     });
+//   };
 
   componentDidMount() {
     var config = {
@@ -83,7 +83,7 @@ class PersonList extends React.Component {
                 <Checkbox
                 checked={persons.id}
                 tabIndex={-1}
-                onClick={this.handleToggle(1)}
+                // onClick={this.handleToggle(1)}
                 checkedIcon={<Check className={classes.checkedIcon} />}
                 icon={<Check className={classes.uncheckedIcon} />}
                 classes={{

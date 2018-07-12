@@ -13,6 +13,13 @@ import Edit from "@material-ui/icons/Edit";
 import Tooltip from "@material-ui/core/Tooltip";
 import tasksStyle from "assets/jss/material-dashboard-react/components/tasksStyle.jsx";
 
+import Grid from "@material-ui/core/Grid";
+// core components
+import GridItem from "components/Grid/GridItem.jsx";
+import Card from "components/Card/Card.jsx";
+import CardHeader from "components/Card/CardHeader.jsx";
+import CardBody from "components/Card/CardBody.jsx";
+
 Modal.setAppElement("#root");
 
 class App extends React.Component{
@@ -75,17 +82,26 @@ class App extends React.Component{
                     style={tasksStyle}
                     contentLabel={"Modal de edicion " + Idresultado}
                     >
-
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Hello {Idresultado} </h2>
-                    <button onClick={this.closeModal}>close</button>
-                    <div>hOLA Mundo</div>
-                    <form>
-                        <input />
-                        <button>tab navigation</button>
-                        <button>stays</button>
-                        <button>inside</button>
-                        <button>the modal</button>
-                    </form>
+                    <Grid container>
+                        <GridItem xs={12} sm={12} md={12}>
+                            <Card plain>
+                                <CardHeader plain color="primary">
+                                    <h4 className={classes.cardTitleWhite}>Centro : </h4>
+                                    <p className={classes.cardCategoryWhite}>
+                                    Here is a subtitle for this table
+                                    </p>
+                                </CardHeader>
+                                <CardBody> 
+                                    <h2 ref={subtitle => this.subtitle = subtitle}>Hello {Idresultado} </h2>
+                                    <form>
+                                        <input />                        
+                                        <button onClick={this.closeModal}>close</button>
+                                        <button>the modal</button>
+                                    </form>
+                                </CardBody>
+                            </Card>
+                        </GridItem>
+                    </Grid>                    
                 </Modal> 
             </div>                                     
         );

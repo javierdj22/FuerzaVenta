@@ -10,6 +10,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import IconButton from "@material-ui/core/IconButton";
 import ReactModal from 'react-modal';
 import Edit from "@material-ui/icons/Edit";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const customStyles = {
     content : {
@@ -61,20 +62,33 @@ class App extends React.Component{
         const { classes, Idresultado } = this.props;
         return (
             <div>
-                <IconButton
-                aria-label="Edit"                
-                className={classes.tableActionButton}
-                id={Idresultado}
-                onClick={this.handleToggle(Idresultado)}
-                >
-                <Edit                  
-                    className={
-                        classes.tableActionButtonIcon + " " + classes.edit
-                    }
-                />
-                </IconButton>
-                <ReactModal>
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
+                <Tooltip
+                id="tooltip-top"
+                title="Editar"
+                placement="top"
+                classes={{ tooltip: classes.tooltip }}
+                >             
+                    <IconButton
+                        aria-label="Edit"                
+                        className={classes.tableActionButton}
+                        id={Idresultado}
+                        onClick={this.handleToggle(Idresultado)}
+                        >
+                        <Edit                  
+                            className={
+                                classes.tableActionButtonIcon + " " + classes.edit
+                            }
+                        />
+                    </IconButton>                    
+                </Tooltip>
+                <ReactModal
+                    isOpen={this.state.modalIsOpen}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                    contentLabel={"Example Modal " + Idresultado}
+                    >
+                    <h2 ref={subtitle => this.subtitle = subtitle}>Hello {Idresultado} </h2>
                     <button onClick={this.closeModal}>close</button>
                     <div>I am a modal</div>
                     <form>
@@ -84,10 +98,11 @@ class App extends React.Component{
                         <button>inside</button>
                         <button>the modal</button>
                     </form>
-            </ReactModal>
-            </div>           
+                </ReactModal> 
+            </div>                                     
         );
     }
 }
+ReactModal.setAppElement('#root');
 
 export default withStyles(customStyles)(App);

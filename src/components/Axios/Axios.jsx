@@ -21,7 +21,7 @@ class PersonList extends React.Component {
     //   checked: this.props.checkedIndexes,
       persons: []
     };
-
+ 
 //   handleToggle = persons => () => {
 //     const { checked } = this.state;
 //     const currentIndex = checked.indexOf(1);
@@ -52,8 +52,7 @@ class PersonList extends React.Component {
     .then(res => { 
         const persons = res.data;//.Data;
         this.setState({ persons });
-        console.log(res);  
-    }) 
+    })  
     .catch(function (error) {
         // handle error 
         console.log(error);    
@@ -61,7 +60,7 @@ class PersonList extends React.Component {
   } 
 
   handleClick = persons => () => {
-    console.log('this is:', persons.username + ' ' + persons.id);
+    console.log('this is:', persons.id + ' ' + persons.id);
     
   }
 
@@ -71,18 +70,18 @@ class PersonList extends React.Component {
       
         <Table
             tableHeaderColor="primary"
-            tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", ""]}
+            tableHead={["Nombre Centro", "Codigo", "Fecha Registro"]}
             tableData={
-            this.state.persons.map(persons =>[persons.name, persons.username, persons.email, 
-            <Tooltip
+            this.state.persons.map(persons =>[persons.id, persons.username, persons.username
+            ,<Tooltip
                 id="tooltip-top"
                 title={"Estado" + persons.username}
                 placement="top"
                 classes={{ tooltip: classes.tooltip }}
             >
                 <Checkbox
-                checked={persons.id}
-                tabIndex={-1}
+                checked={"0"}
+                //tabIndex={-1}
                 // onClick={this.handleToggle(1)}
                 checkedIcon={<Check className={classes.checkedIcon} />}
                 icon={<Check className={classes.uncheckedIcon} />}
@@ -90,10 +89,9 @@ class PersonList extends React.Component {
                     checked: classes.checked
                 }}
                 />
-            </Tooltip>,
-            <EditarModal Idresultado={persons.id} />
-            ,
-            <Tooltip
+            </Tooltip>
+            ,<EditarModal Idresultado={persons.id} />
+            ,<Tooltip
                 id="tooltip-top-start"
                 title="Eliminar"
                 placement="top"
@@ -110,6 +108,7 @@ class PersonList extends React.Component {
                 />
                 </IconButton>
             </Tooltip>
+            
             ])}
         />
     )

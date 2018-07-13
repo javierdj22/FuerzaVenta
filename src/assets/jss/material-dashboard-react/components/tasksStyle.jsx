@@ -52,6 +52,9 @@ const tasksStyle = {
     zIndex : 11,
     backgroundColor : 'rgba(000, 000, 000, 0.75)',
   },
+  ModalGrid: { 
+    textAlign: "right",
+  },
   content : {
     top                   : '50%',
     left                  : '50%',

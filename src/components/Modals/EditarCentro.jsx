@@ -1,9 +1,4 @@
 import React from "react";
-import ReactDOM from 'react-dom';
-// nodejs library that concatenates classes
-import classNames from "classnames";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
@@ -20,6 +15,7 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
+import Button from "components/CustomButtons/Button.jsx";
 
 
 Modal.setAppElement("#root");
@@ -88,7 +84,7 @@ class App extends React.Component{
                         <GridItem xs={12} sm={12} md={12}>
                             <Card plain>
                                 <CardHeader plain color="primary">
-                                    <p className={classes.cardTitleWhite}>Modificar Centro : </p>
+                                    <div className={classes.cardTitleWhite}>Modificar Centro : </div>
                                 </CardHeader>
                                 <CardBody> 
                                     <Grid container> 
@@ -102,9 +98,25 @@ class App extends React.Component{
                                         </GridItem>
                                     </Grid>            
                                 </CardBody>
-                                <CardFooter>                     
-                                    <button onClick={this.closeModal}>Aceptar</button>
-                                    <button>Cancelar</button>
+                                <CardFooter>      
+                                    <Grid container> 
+                                        <GridItem xs={12} sm={12} md={12}>               
+                                            <Button
+                                                round
+                                                color="info"
+                                                onClick={this.closeModal}
+                                            >
+                                                Aceptar
+                                            </Button>
+                                            <Button
+                                                round
+                                                color="info"
+                                                onClick={this.closeModal}
+                                            >
+                                                Cancelar
+                                            </Button>
+                                        </GridItem>
+                                    </Grid>       
                                 </CardFooter>
                             </Card>
                         </GridItem>

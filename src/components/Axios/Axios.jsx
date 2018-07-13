@@ -70,13 +70,9 @@ class PersonList extends React.Component {
       
         <Table
             tableHeaderColor="primary"
-<<<<<<< HEAD
-            tableHead={["Nombre Centro", "Codigo", "Fecha Registro"]}
-=======
             tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", "", ""]}
->>>>>>> 399c59fe3cd2760d539b925921155964cd757acb
             tableData={
-            this.state.persons.map(persons =>[persons.id, persons.username, persons.username
+            this.state.persons.map(persons =>[persons.name, persons.username, persons.username
             ,<Tooltip
                 id="tooltip-top"
                 title={"Estado" + persons.username}
@@ -93,15 +89,9 @@ class PersonList extends React.Component {
                     checked: classes.checked
                 }}
                 />
-<<<<<<< HEAD
-            </Tooltip>
-            ,<EditarModal Idresultado={persons.id} />
-            ,<Tooltip
-=======
             </Tooltip>,
-            <EditarModal Idresultado={persons.id} />,
+            <EditarModal objCentro={persons} />,
             <Tooltip
->>>>>>> 399c59fe3cd2760d539b925921155964cd757acb
                 id="tooltip-top-start"
                 title="Eliminar"
                 placement="top"

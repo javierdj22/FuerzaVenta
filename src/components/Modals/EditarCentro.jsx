@@ -1,4 +1,9 @@
 import React from "react";
+import ReactDOM from 'react-dom';
+// nodejs library that concatenates classes
+import classNames from "classnames";
+// nodejs library to set properties for components
+import PropTypes from "prop-types";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
@@ -15,7 +20,6 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
-import Button from "components/CustomButtons/Button.jsx";
 
 import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
@@ -28,7 +32,7 @@ class App extends React.Component{
 
         this.state = { 
             modalIsOpen : false,
-            Idresultado : "",
+            objCentro : null,
             clasess : this.props
         };
       
@@ -54,7 +58,7 @@ class App extends React.Component{
     }
 
     render(){
-        const { classes, Idresultado } = this.props;
+        const { classes, objCentro } = this.props;
         return (
             <div>
                 <Tooltip
@@ -66,8 +70,8 @@ class App extends React.Component{
                         <IconButton
                             aria-label="Edit"                
                             className={classes.tableActionButton}
-                            id={Idresultado}
-                            onClick={this.openModal(Idresultado)}
+                            id={objCentro}
+                            onClick={this.openModal(objCentro)}
                             >
                             <Edit                  
                                 className={
@@ -81,18 +85,17 @@ class App extends React.Component{
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     style={tasksStyle}
-                    contentLabel={"Modal de edicion " + Idresultado}
+                    contentLabel={"Modal de edicion " + objCentro}
                     >
                     <Grid container> 
                         <GridItem xs={12} sm={12} md={12}>
                             <Card plain>
                                 <CardHeader plain color="primary">
-                                    <div className={classes.cardTitleWhite}>Modificar Centro : </div>
+                                    <p className={classes.cardTitleWhite}>Modificar Centro : </p>
                                 </CardHeader>
                                 <CardBody> 
                                     <Grid container> 
-                                        <GridItem xs={6} sm={6} md={6}>
-                                            {/* <h4 ref={subtitle => this.subtitle = subtitle}>Codigo</h4> */}
+                                        <GridItem xs={4} sm={4} md={4}>                                            
                                             <CustomInput
                                                 labelText="Codigo"
                                                 id="codigo"
@@ -101,8 +104,16 @@ class App extends React.Component{
                                                 }}
                                             />
                                         </GridItem>
+                                        <GridItem xs={8} sm={8} md={8}>
+                                            <CustomInput
+                                                labelText="Nombre"
+                                                id="nombre"
+                                                formControlProps={{
+                                                    fullWidth: true
+                                                }}
+                                            />
+                                        </GridItem>
                                         <GridItem xs={6} sm={6} md={6}>
-                                            {/* <h4 ref={subtitle => this.subtitle = subtitle}>Nombre</h4> */}
                                             <CustomInput
                                                 labelText="Nombre"
                                                 id="nombre"
@@ -113,27 +124,6 @@ class App extends React.Component{
                                         </GridItem>
                                     </Grid>            
                                 </CardBody>
-<<<<<<< HEAD
-                                <CardFooter>      
-                                    <Grid container> 
-                                        <GridItem xs={12} sm={12} md={12}>               
-                                            <Button
-                                                round
-                                                color="info"
-                                                onClick={this.closeModal}
-                                            >
-                                                Aceptar
-                                            </Button>
-                                            <Button
-                                                round
-                                                color="info"
-                                                onClick={this.closeModal}
-                                            >
-                                                Cancelar
-                                            </Button>
-                                        </GridItem>
-                                    </Grid>       
-=======
                                 <CardFooter>
                                     <Button                                        
                                         color="danger"
@@ -147,7 +137,6 @@ class App extends React.Component{
                                     >
                                         Aceptar
                                     </Button>
->>>>>>> 399c59fe3cd2760d539b925921155964cd757acb
                                 </CardFooter>
                             </Card>
                         </GridItem>

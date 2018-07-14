@@ -72,7 +72,7 @@ class PersonList extends React.Component {
             tableHeaderColor="primary"
             tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", "", ""]}
             tableData={
-            this.state.persons.map(persons =>[persons.name, persons.username, persons.username
+            this.state.persons.map(persons =>[persons.name, persons.username, persons.email
             ,<Tooltip
                 id="tooltip-top"
                 title={"Estado" + persons.username}

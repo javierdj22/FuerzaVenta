@@ -23,6 +23,8 @@ import CardFooter from "components/Card/CardFooter.jsx";
 
 import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
+import Checkbox from "@material-ui/core/Checkbox";
+import Check from "@material-ui/icons/Check";
 
 Modal.setAppElement("#root");
 
@@ -32,26 +34,42 @@ class App extends React.Component{
 
         this.state = { 
             modalIsOpen : false,
-            objCentro : null,
+            objCentro : {},
+            Modelo : {},
             clasess : this.props
         };
       
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     openModal = recibe => () =>
     {
-        console.log(recibe)
         this.setState({modalIsOpen: true});
     }
 
     afterOpenModal() {
         // references are now sync'd and can be accessed.
         // this.subtitle.style.color = '#d9012e';
+        const {objCentro} = this.props;
         
+        this.setState({Modelo : objCentro})
     }
+
+    
+    handleChange(event) {
+
+        var obj = {...this.state.Modelo}; // recuperar el Modelo del estado
+        
+        Object.keys(obj).map((key, index) =>{
+            if (event.target.id == key) // 'id' == nombres de las propiedades del Modelo recibido
+                obj[key] = event.target.value; 
+        });
+
+        this.setState({Modelo: obj});
+      }
 
     closeModal() {
         this.setState({modalIsOpen: false});
@@ -59,6 +77,7 @@ class App extends React.Component{
 
     render(){
         const { classes, objCentro } = this.props;
+        const { Modelo } = this.state;
         return (
             <div>
                 <Tooltip
@@ -98,7 +117,11 @@ class App extends React.Component{
                                         <GridItem xs={4} sm={4} md={4}>                                            
                                             <CustomInput
                                                 labelText="Codigo"
-                                                id="codigo"
+                                                id="username"
+                                                inputProps={{
+                                                    value : "" + Modelo.username,
+                                                    onChange : this.handleChange
+                                                }}
                                                 formControlProps={{
                                                     fullWidth: true
                                                 }}
@@ -107,20 +130,52 @@ class App extends React.Component{
                                         <GridItem xs={8} sm={8} md={8}>
                                             <CustomInput
                                                 labelText="Nombre"
-                                                id="nombre"
+                                                id="name"
+                                                inputProps={{
+                                                    value : "" + Modelo.name,
+                                                    onChange : this.handleChange
+                                                }}
                                                 formControlProps={{
                                                     fullWidth: true
                                                 }}
                                             />
                                         </GridItem>
-                                        <GridItem xs={6} sm={6} md={6}>
+                                        <GridItem xs={3} sm={3} md={3}>
                                             <CustomInput
-                                                labelText="Nombre"
-                                                id="nombre"
+                                                labelText="Logitud"
+                                                id="logitud"
+                                                inputProps={{
+                                                    // value : "" + Modelo.logitud,
+                                                    onChange : this.handleChange
+                                                }}
                                                 formControlProps={{
                                                     fullWidth: true
                                                 }}
                                             />
+                                        </GridItem>
+                                        <GridItem xs={3} sm={3} md={3}>
+                                            <CustomInput
+                                                labelText="Latitud"
+                                                id="latitud"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    fullWidth: true
+                                                }}
+                                            />
+                                        </GridItem>
+                                        <GridItem xs={3} sm={3} md={3} />
+                                        <GridItem xs={3} sm={3} md={3}>
+                                            <label>
+                                                Activo :
+                                                <Checkbox                                                    
+                                                    checkedIcon={<Check className={classes.checkedIcon} />}
+                                                    icon={<Check className={classes.uncheckedIcon} />}
+                                                    classes={{checked: classes.checked}}
+                                                />
+                                            </label>                                            
                                         </GridItem>
                                     </Grid>            
                                 </CardBody>

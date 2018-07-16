@@ -200,7 +200,7 @@ const buttonStyle = {
     borderRadius: "0.2rem"
   },
   round: {
-    borderRadius: "30px"
+    borderRadius: "30px",
   },
   block: {
     width: "100% !important"

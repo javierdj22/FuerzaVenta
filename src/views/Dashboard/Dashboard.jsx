@@ -121,7 +121,7 @@ class Dashboard extends React.Component {
                   <Accessibility />
                 </CardIcon>
                 <p className={classes.cardCategory}>Followers</p>
-                <h3 className={classes.cardTitle}>+245</h3>
+                <h3 className={classes.cardTitle}>+215</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>

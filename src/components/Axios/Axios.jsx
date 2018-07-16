@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react'
 import PropTypes from "prop-types";
 
 import axios from 'axios';
@@ -7,20 +7,31 @@ import Table from "components/Table/Table.jsx";
 import Checkbox from "@material-ui/core/Checkbox";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
 import tasksStyle from "assets/jss/material-dashboard-react/components/tasksStyle.jsx";
 import EditarModal from "components/Modals/EditarCentro.jsx";
+import EliminarModal from "components/Modals/EliminarCentro.jsx";
 
-import Edit from "@material-ui/icons/Edit";
-import Close from "@material-ui/icons/Close";
+import Input from "@material-ui/core/Input";
 import Check from "@material-ui/icons/Check";
-import EditarCentro from '../Modals/EditarCentro';
 
-class PersonList extends React.Component {
-    state = {
-    //   checked: this.props.checkedIndexes,
-      persons: []
-    };
+import Grid from "@material-ui/core/Grid";
+// core components
+import GridItem from "components/Grid/GridItem.jsx";
+import SearchInput, {createFilter} from 'react-search-input'
+import Button from "components/CustomButtons/Button.jsx";
+import AgregarCentro from '../Modals/AgregarCentro';
+import SelectClass from '../Search/Search';
+
+const KEYS_TO_FILTERS = ['name', 'username', 'id']
+class PersonList extends Component {
+    constructor (props) {
+      super(props)
+      this.state = {
+        searchTerm: '',
+        persons: []
+      }
+      this.searchUpdated = this.searchUpdated.bind(this)
+    }
  
 //   handleToggle = persons => () => {
 //     const { checked } = this.state;
@@ -65,22 +76,40 @@ class PersonList extends React.Component {
   }
 
   render() { 
+    const filteredEmails = this.state.persons.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS))
     const { classes } = this.props;
     return (
       
+    <div>
+        <Grid container> 
+            <GridItem xs={8} sm={8} md={8}>
+                <SearchInput 
+                classes={{
+                root: classes.marginTop,
+                disabled: classes.disabled,
+                underline: classes.underlineClasses
+                }} onChange={this.searchUpdated} />
+            </GridItem>
+            <GridItem xs={3} sm={3} md={3} >
+                <SelectClass/> 
+            </GridItem>
+            <GridItem xs={1} sm={1} md={1}>
+                <AgregarCentro />
+            </GridItem>
+        </Grid>   
         <Table
             tableHeaderColor="primary"
             tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", "", ""]}
             tableData={
-            this.state.persons.map(persons =>[persons.name, persons.username, persons.email
+            filteredEmails.map(persons =>[persons.name, persons.username, persons.email
             ,<Tooltip
                 id="tooltip-top"
-                title={"Estado" + persons.username}
+                title={persons.username}
                 placement="top"
                 classes={{ tooltip: classes.tooltip }}
             >
                 <Checkbox
-                checked={"0"}
+                checked={false}
                 //tabIndex={-1}
                 // onClick={this.handleToggle(1)}
                 checkedIcon={<Check className={classes.checkedIcon} />}
@@ -91,27 +120,14 @@ class PersonList extends React.Component {
                 />
             </Tooltip>,
             <EditarModal objCentro={persons} />,
-            <Tooltip
-                id="tooltip-top-start"
-                title="Eliminar"
-                placement="top"
-                classes={{ tooltip: classes.tooltip }}
-            >
-                <IconButton
-                aria-label="Close"
-                className={classes.tableActionButton}
-                >
-                <Close
-                    className={
-                    classes.tableActionButtonIcon + " " + classes.close
-                    }
-                />
-                </IconButton>
-            </Tooltip>
-            
+            <EliminarModal objCentro={persons} />
             ])}
         />
+    </div>
     )
+  }
+  searchUpdated (term) {
+    this.setState({searchTerm: term})
   }
 }
 PersonList.propTypes = {

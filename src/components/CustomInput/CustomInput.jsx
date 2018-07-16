@@ -12,6 +12,7 @@ import Check from "@material-ui/icons/Check";
 // core components
 import customInputStyle from "assets/jss/material-dashboard-react/components/customInputStyle";
 
+import SearchInput, {createFilter} from 'react-search-input'
 function CustomInput({ ...props }) {
   const {
     classes,
@@ -21,9 +22,11 @@ function CustomInput({ ...props }) {
     labelProps,
     inputProps,
     error,
-    success
+    success,
+    searchUpdated
   } = props;
 
+  //this.searchUpdated = this.searchUpdated.bind(this)
   const labelClasses = classNames({
     [" " + classes.labelRootError]: error,
     [" " + classes.labelRootSuccess]: success && !error
@@ -45,6 +48,7 @@ function CustomInput({ ...props }) {
         <InputLabel
           className={classes.labelRoot + labelClasses}
           htmlFor={id}
+          onChange = {searchUpdated}
           {...labelProps}
         >
           {labelText}

@@ -9,7 +9,7 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import Axios from "components/Axios/Axios.jsx";
-
+import Search from "components/Search/Search.jsx";
 const styles = {
   cardCategoryWhite: {
     "&,& a,& a:hover,& a:focus": {
@@ -47,15 +47,13 @@ function Centros(props) {
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Simple Table</h4>
+            <h4 className={classes.cardTitleWhite}>Lista de Centros</h4>
             <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
+              Agregar, Modificar y Eliminar Centro.
             </p>
-            Axios
           </CardHeader>
-          <CardBody> 
-            <Axios> 
-            </Axios> 
+          <CardBody>
+            <Axios/> 
           </CardBody>
         </Card>
       </GridItem>

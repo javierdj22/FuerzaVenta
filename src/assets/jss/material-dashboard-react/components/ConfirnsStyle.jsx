@@ -5,7 +5,7 @@ import {
 } from "assets/jss/material-dashboard-react.jsx";
 import tooltipStyle from "assets/jss/material-dashboard-react/tooltipStyle.jsx";
 import checkboxAdnRadioStyle from "assets/jss/material-dashboard-react/checkboxAdnRadioStyle.jsx";
-const tasksStyle = {
+const ConfirnsStyle = {
   ...tooltipStyle,
   ...checkboxAdnRadioStyle,
   table: {
@@ -43,12 +43,6 @@ const tasksStyle = {
     color: primaryColor,
     boxShadow: "none"
   },
-  agregar: {
-    borderRadius: "30px",
-    backgroundColor: primaryColor,
-    color: "#ffffff",
-    boxShadow: "none"
-  },
   close: {
     backgroundColor: "transparent",
     color: dangerColor,
@@ -64,12 +58,32 @@ const tasksStyle = {
   content : {
     top                   : '50%',
     left                  : '50%',
-    right                 : '50%',
+    right                 : '75%',
     bottom                : 'auto',
     marginRight           : '-50%',
     padding               : '0px',
     transform             : 'translate(-50%, -50%)',
   },
-  
+  logo: {
+    position: "relative",
+    padding: "15px 15px",
+    zIndex: "4",
+    "&:after": {
+      content: '""',
+      position: "absolute",
+      bottom: "0",
+
+      height: "1px",
+      right: "15px",
+      width: "calc(100% - 30px)",
+      backgroundColor: "rgba(180, 180, 180, 0.3)"
+    }
+  },
+  img: {
+    width: "75px",
+    position: "absolute",
+    verticalAlign: "middle",
+    border: "0"
+  }
 };
-export default tasksStyle;
+export default ConfirnsStyle;

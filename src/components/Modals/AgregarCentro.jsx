@@ -25,6 +25,7 @@ import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Checkbox from "@material-ui/core/Checkbox";
 import Check from "@material-ui/icons/Check";
+import PersonAdd from "@material-ui/icons/PersonAdd";
 
 Modal.setAppElement("#root");
 
@@ -45,8 +46,7 @@ class App extends React.Component{
         this.handleChange = this.handleChange.bind(this);
     }
 
-    openModal = recibe => () =>
-    {
+    openModal(){
         this.setState({modalIsOpen: true});
     }
 
@@ -82,35 +82,27 @@ class App extends React.Component{
             <div>
                 <Tooltip
                     id="tooltip-top"
-                    title="Editar"
+                    title="Agregar"
                     placement="top"
                     classes={{ tooltip: classes.tooltip }}
-                    >             
-                        <IconButton
-                            aria-label="Edit"                
-                            className={classes.tableActionButton}
-                            id={objCentro}
-                            onClick={this.openModal(objCentro)}
-                            >
-                            <Edit                  
-                                className={
-                                    classes.tableActionButtonIcon + " " + classes.edit
-                                }
-                            />
-                        </IconButton>                    
+                    >       
+                        <Button color="white" aria-label="edit" justIcon round className={classes.agregar}
+                                onClick={this.openModal}>
+                                <PersonAdd />
+                        </Button>                        
                 </Tooltip>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     style={tasksStyle}
-                    contentLabel={"Modal de edicion " + objCentro}
+                    contentLabel={"Modal de edicion "}
                     >
                     <Grid container> 
                         <GridItem xs={12} sm={12} md={12}>
                             <Card plain>
                                 <CardHeader plain color="primary">
-                                    <div className={classes.cardTitleWhite}>Modificar Centro : </div>
+                                    <div className={classes.cardTitleWhite}>Agregar Centro : </div>
                                 </CardHeader>
                                 <CardBody> 
                                     <Grid container> 
@@ -119,7 +111,7 @@ class App extends React.Component{
                                                 labelText="Codigo"
                                                 id="username"
                                                 inputProps={{
-                                                    value : "" + Modelo.username,
+                                                    value : "",
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
@@ -132,7 +124,7 @@ class App extends React.Component{
                                                 labelText="Nombre"
                                                 id="name"
                                                 inputProps={{
-                                                    value : "" + Modelo.name,
+                                                    value : "",
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{

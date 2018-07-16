@@ -34,7 +34,7 @@ class HeaderLinks extends React.Component {
     const { open } = this.state;
     return (
       <div>
-        <div className={classes.searchWrapper}>
+        {/* <div className={classes.searchWrapper}>
         <CustomInput
           formControlProps={{
             className: classes.margin + " " + classes.search
@@ -50,17 +50,15 @@ class HeaderLinks extends React.Component {
           <Search />
         </Button>
       </div>
+       */}
         <Manager className={classes.manager}>
           <Target>
-            <Button
-              color={window.innerWidth > 959 ? "transparent" : "white"}
-              justIcon={window.innerWidth > 959}
-              simple={!(window.innerWidth > 959)}
-              aria-label="Notifications"
-              aria-owns={open ? "menu-list" : null}
-              aria-haspopup="true"
-              onClick={this.handleClick}
-              className={classes.buttonLink}
+        <Button color="white" aria-label="edit" justIcon round
+        aria-label="Notifications"
+        aria-owns={open ? "menu-list" : null}
+        aria-haspopup="true"
+        onClick={this.handleClick}
+        className={classes.buttonLink}
             >
               <Person className={classes.icons} />
               <Hidden mdUp>

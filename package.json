@@ -22,6 +22,8 @@
     "react-modal": "^3.5.1",
     "react-router-dom": "4.3.1",
     "react-scripts": "1.1.4",
+    "react-search-input": "^0.11.3",
+    "react-select": "^1.2.1",
     "react-swipeable-views": "0.12.13"
   },
   "scripts": {
@@ -40,5 +42,8 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
   },
-  "homepage": "https://creativetimofficial.github.io/material-dashboard-react/#/dashboard"
+  "homepage": "https://creativetimofficial.github.io/material-dashboard-react/#/dashboard",
+  "devDependencies": {
+    "rc-select": "^8.1.0"
+  }
 }

@@ -154,6 +154,36 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
     outline: 0 !important;
 }
 
+input[type="search"]{    
+    font: inherit;
+    color: currentColor;
+    border: 0;
+    border-bottom-style:solid;
+    border-bottom-width:3px;
+    border-bottom-color:red;
+    margin: 0;
+    padding: 6px 0 7px;
+    width: 95%;
+    float: left;
+    flex-grow: 1;
+    box-sizing: content-box;
+    background: none;
+}
+input[type="Select"]{    
+    width: 95%;
+    height:40;
+} 
+.rc-select{
+    width: 95%;
+    padding: 6px 0 7px;
+}
+.rc-select-selection {
+    height: 35px;
+    padding: 2px;
+}
+.rc-select-enabled .rc-select-selection:active {
+  border-color: #d9012e;
+}
 legend {
     margin-bottom: 20px;
     font-size: 21px;

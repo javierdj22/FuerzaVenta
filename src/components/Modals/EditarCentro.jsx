@@ -75,6 +75,20 @@ class App extends React.Component{
         this.setState({modalIsOpen: false});
     }
 
+    CentroEdit(event){
+        event.preventDefault();
+        var username = this.state.Modelo.username;
+        //var username = this.state.Modelo.username;
+        //var username = this.state.Modelo.username;
+        //var username = this.state.Modelo.username;
+        //var username = this.state.Modelo.username;
+        this.ObjReturn ={ username };
+
+        this.props.parentFlatList.EditCentros(this.ObjReturn);
+
+        this.setState({modalIsOpen: false});
+    }
+
     render(){
         const { classes, objCentro } = this.props;
         const { Modelo } = this.state;
@@ -188,7 +202,7 @@ class App extends React.Component{
                                         >
                                             Aceptar
                                         </Button>  
-                                        <Button                                        
+                                        <Button                                         
                                             color="danger"
                                             onClick={this.closeModal}
                                         >

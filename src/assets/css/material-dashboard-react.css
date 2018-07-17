@@ -184,6 +184,23 @@ input[type="Select"]{
 .rc-select-enabled .rc-select-selection:active {
   border-color: #d9012e;
 }
+.rc-select-selection--single .rc-select-selection__clear {
+    top: 0;
+    right: 1px;
+    background: #d9012e;
+    border-radius: 20px;
+    width: 15px;
+    padding: 5px 5px;
+    height: 15px;
+    border: 1px solid #960523;
+    z-index: 1;
+}
+.rc-select-selection__clear:after {
+    color: #fff;
+    top: -1px;
+    left: 9px;
+    position: absolute;
+}
 legend {
     margin-bottom: 20px;
     font-size: 21px;

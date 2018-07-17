@@ -19,7 +19,7 @@ import Grid from "@material-ui/core/Grid";
 import GridItem from "components/Grid/GridItem.jsx";
 import SearchInput, {createFilter} from 'react-search-input'
 import Button from "components/CustomButtons/Button.jsx";
-import AgregarCentro from '../Modals/AgregarCentro';
+import AgregarCentro  from '../Modals/AgregarCentro';
 import SelectClass from '../Search/Search';
 
 const KEYS_TO_FILTERS = ['name', 'username', 'id']
@@ -75,6 +75,24 @@ class PersonList extends Component {
     
   }
 
+  AddCentros(ObjReturn){
+      var name = ObjReturn.username;
+      var username = ObjReturn.username;
+      var email = ObjReturn.username;
+      this.setState({
+          persons: this.state.persons.concat({name, username, email})
+      })
+  }
+
+  EditCentros(ObjReturn){
+      var name = ObjReturn.username;
+      var username = ObjReturn.username;
+      var email = ObjReturn.username;
+      this.setState({
+          persons: this.state.persons.concat({name, username, email})
+      })
+  }
+  
   render() { 
     const filteredEmails = this.state.persons.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS))
     const { classes } = this.props;
@@ -94,7 +112,7 @@ class PersonList extends Component {
                 <SelectClass/> 
             </GridItem>
             <GridItem xs={1} sm={1} md={1}>
-                <AgregarCentro />
+                <AgregarCentro parentFlatList={this} />
             </GridItem>
         </Grid>   
         <Table
@@ -119,7 +137,7 @@ class PersonList extends Component {
                 }}
                 />
             </Tooltip>,
-            <EditarModal objCentro={persons} />,
+            <EditarModal objCentro={persons} parentFlatList={this} />,
             <EliminarModal objCentro={persons} />
             ])}
         />

@@ -4,19 +4,14 @@ import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 
 class SelectClass extends React.Component {
-  state = {
-    _selectedOption: 'Seleccionar Centro.',
-    get selectedOption() {
-      return this._selectedOption;
-    },
-    set selectedOption(value) {
-      this._selectedOption = value;
-    },
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
   }
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
-    selectedOption.value = selectedOption;
-    console.log(`Selected: ${selectedOption.label}`);
+  handleChange(selectedOption) {
+    this.setState({value: selectedOption});
   }
   render() {
   	const { selectedOption } = this.state;
@@ -24,13 +19,13 @@ class SelectClass extends React.Component {
  
     return (
       <Select 
-          onChange={this.onChange}
+      value={this.state.value}
+          onChange={this.handleChange}
           onSelect={this.onSelect}
           onInputKeyDown={this.onKeyDown}
           notFoundContent=""
           allowClear
           placeholder="please select"
-          value={value}
           combobox
           backfill
         >

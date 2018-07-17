@@ -35,8 +35,9 @@ class App extends React.Component{
 
         this.state = { 
             modalIsOpen : false,
-            objCentro : {},
-            Modelo : {},
+            Modelo : {
+                username : "",
+                name : ""},
             clasess : this.props
         };
       
@@ -44,6 +45,9 @@ class App extends React.Component{
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.addCentros = this.addCentros.bind(this);
+        this.ObjReturn = {};
+        
     }
 
     openModal(){
@@ -53,9 +57,9 @@ class App extends React.Component{
     afterOpenModal() {
         // references are now sync'd and can be accessed.
         // this.subtitle.style.color = '#d9012e';
-        const {objCentro} = this.props;
         
-        this.setState({Modelo : objCentro})
+        
+        //this.setState({Modelo : Obj})
     }
 
     
@@ -75,9 +79,20 @@ class App extends React.Component{
         this.setState({modalIsOpen: false});
     }
 
+    addCentros(event){
+        event.preventDefault();
+        var username = this.state.Modelo.username;
+        this.ObjReturn ={ username };
+
+        this.props.parentFlatList.AddCentros(this.ObjReturn);
+
+        this.setState({modalIsOpen: false});
+    }
+
     render(){
-        const { classes, objCentro } = this.props;
+        const { classes } = this.props;
         const { Modelo } = this.state;
+        const { ObjReturn } = this.ObjReturn;
         return (
             <div>
                 <Tooltip
@@ -97,7 +112,7 @@ class App extends React.Component{
                     onRequestClose={this.closeModal}
                     style={tasksStyle}
                     contentLabel={"Modal de edicion "}
-                    >
+                    >   
                     <Grid container> 
                         <GridItem xs={12} sm={12} md={12}>
                             <Card plain>
@@ -111,10 +126,10 @@ class App extends React.Component{
                                                 labelText="Codigo"
                                                 id="username"
                                                 inputProps={{
-                                                    value : "",
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
+                                                    value : "" + Modelo.username,
                                                     fullWidth: true
                                                 }}
                                             />
@@ -124,7 +139,6 @@ class App extends React.Component{
                                                 labelText="Nombre"
                                                 id="name"
                                                 inputProps={{
-                                                    value : "",
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
@@ -137,7 +151,6 @@ class App extends React.Component{
                                                 labelText="Logitud"
                                                 id="logitud"
                                                 inputProps={{
-                                                    // value : "" + Modelo.logitud,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
@@ -150,7 +163,6 @@ class App extends React.Component{
                                                 labelText="Latitud"
                                                 id="latitud"
                                                 inputProps={{
-                                                    // value : "" + Modelo.latitud,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
@@ -174,9 +186,10 @@ class App extends React.Component{
                                     <GridItem xs={8} sm={8} md={8}>                                           
                                     </GridItem>
                                     <GridItem xs={4} sm={4} md={4}> 
-                                        <Button                                        
+                                        <Button              
+                                            Types="Submit"                          
                                             color="primary"
-                                            onClick={this.closeModal}
+                                            onClick={this.addCentros}
                                         >
                                             Aceptar
                                         </Button>  
@@ -190,7 +203,7 @@ class App extends React.Component{
                                 </CardFooter>
                             </Card>
                         </GridItem>
-                    </Grid>                    
+                    </Grid>      
                 </Modal> 
             </div>                                     
         );
@@ -199,4 +212,4 @@ class App extends React.Component{
 
 
 
-export default withStyles(tasksStyle)(App);
+export default withStyles(tasksStyle)(App, this.ObjReturn);

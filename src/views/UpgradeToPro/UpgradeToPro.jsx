@@ -50,8 +50,8 @@ const styles = {
     MsOverflowStyle: "-ms-autohiding-scrollbar"
   },
   table: {
-    width: "100%",
-    maxWidth: "100%",
+    width: "10%",
+    maxWidth: "10%",
     marginBottom: "1rem",
     backgroundColor: "transparent",
     borderCollapse: "collapse",

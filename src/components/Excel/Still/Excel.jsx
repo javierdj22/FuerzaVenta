@@ -68,7 +68,7 @@ class App extends React.Component{
                             </Tooltip>
         }         
         return (       
-            <Workbook filename="PlantillaTradicional.xlsx" element={ClassExcel}>
+            <Workbook filename="PlantillaStill.xlsx" element={ClassExcel}>
                 <Workbook.Sheet data={ListExcel} name="Hoja1">
                     <Workbook.Column label="% Cumpl."      value="name"  />
                     <Workbook.Column label="% Variab. Vol" value="name"  />

@@ -115,7 +115,7 @@ class App extends React.Component{
                         <GridItem xs={12} sm={12} md={12}>
                             <Card plain>
                                 <CardHeader plain color="primary">
-                                    <div className={classes.cardTitleWhite}>Confirmar Eliminar Centro : </div>
+                                    <div className={classes.cardTitleWhite}>Confirmar Eliminar Usuarios : </div>
                                 </CardHeader>
                                 <CardBody> 
                                     <Grid container> 

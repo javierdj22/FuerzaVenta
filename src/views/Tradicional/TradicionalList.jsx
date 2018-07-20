@@ -14,16 +14,15 @@ import EliminarModal from "components/Modals/Tradicional/Eliminar";
 import AgregarModal  from 'components/Modals/Tradicional/Agregar';
 
 
-import GridItem from "components/Grid/GridItem.jsx";
-import SelectClass from 'components/Select/Select'; 
+import GridItem      from "components/Grid/GridItem.jsx";
+import SelectClass   from 'components/Select/Select'; 
 
 // core 
-import Button from "components/CustomButtons/Button.jsx";
-import Checkbox from "@material-ui/core/Checkbox";
-import withStyles from "@material-ui/core/styles/withStyles";
-import Tooltip from "@material-ui/core/Tooltip";
-import Check from "@material-ui/icons/Check";
-import Grid from "@material-ui/core/Grid";
+import Checkbox      from "@material-ui/core/Checkbox";
+import withStyles    from "@material-ui/core/styles/withStyles";
+import Tooltip       from "@material-ui/core/Tooltip";
+import Check         from "@material-ui/icons/Check";
+import Grid          from "@material-ui/core/Grid";
 import SearchInput, {createFilter} from 'react-search-input'
 import update from 'immutability-helper';
 import Excel from "assets/img/ExcelIcon.png";
@@ -108,16 +107,16 @@ class PersonList extends Component {
                     <SelectClass />
                 </div>     
             </GridItem>
-            <GridItem xs={0} sm={0} md={0}>
+            <GridItem xs={1} sm={1} md={1}>
                 <ExcelModal objCentro={this.state.persons} Add={true} />
             </GridItem>
-            <GridItem xs={0} sm={0} md={0}>
+            <GridItem xs={1} sm={1} md={1}>
                 <AgregarModal parentFlatList={this} />
             </GridItem>
         </Grid>   
         <Table
             tableHeaderColor="primary"
-            tableHead={["Figura", "ID", "Archivo", "FechaReg.", "Activo", ""]}
+            tableHead={["Figura", "ID", "Archivo", "FechaReg.", "Activo"]}
             tableData={
             filteredEmails.map(persons =>[persons.name, persons.id, persons.username, persons.phone,
             <Tooltip

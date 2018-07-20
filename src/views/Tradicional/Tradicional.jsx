@@ -48,7 +48,7 @@ function Tradicional(props) {
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Lista Tradicional</h4>
             <p className={classes.cardCategoryWhite}>
-              Agregar, Modificar y Eliminar Tradicional.
+              Agregar, Modificar y Eliminar registros Tradicional.
             </p>
           </CardHeader>
           <CardBody>

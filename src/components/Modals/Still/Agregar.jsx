@@ -19,12 +19,15 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
+import Table from "components/Table/Table.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Checkbox from "@material-ui/core/Checkbox";
 import Check from "@material-ui/icons/Check";
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import SelectClass from "../../Select/Select";
+import ReactFileReader from 'react-file-reader';
+import XLSX from 'xlsx';
 
 Modal.setAppElement("#root");
 
@@ -45,6 +48,7 @@ class App extends React.Component{
         this.closeModal = this.closeModal.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.Agregar = this.Agregar.bind(this);
+        this.handleFiles = this.handleFiles.bind(this);        
         this.ObjReturn = {};
         
     }
@@ -61,20 +65,23 @@ class App extends React.Component{
         //this.setState({Modelo : Obj})
     }
 
-    
-    handleChange(event) {
+    handleFiles = (files) => {
+        console.log(files.base64)
+      }
 
+
+    handleChange(event) {
         var obj = {...this.state.Modelo}; // recuperar el Modelo del estado
         
         Object.keys(obj).map((key, index) =>{
             if (event.target.id == key) // 'id' == nombres de las propiedades del Modelo recibido
                 obj[key] = event.target.value; 
         });
-
         this.setState({Modelo: obj});
-      }
+    }
 
-    closeModal() {
+
+    closeModal() {        
         this.setState({modalIsOpen: false});
     }
 
@@ -116,104 +123,133 @@ class App extends React.Component{
                         <GridItem xs={12} sm={12} md={12}>
                             <Card plain>
                                 <CardHeader plain color="primary">
-                                    <div className={classes.cardTitleWhite}>Agregar Centro : </div>
+                                    <div className={classes.cardTitleWhite}>Agregar Still : </div>
                                 </CardHeader>
-                                <CardBody> 
-                                    <Grid container> 
-                                        <GridItem xs={6} sm={6} md={6}>                                            
-                                            <CustomInput
-                                                labelText="Nombre 1"
-                                                id="username"
-                                                inputProps={{
-                                                    onChange : this.handleChange
-                                                }}
-                                                formControlProps={{
-                                                    value : "" + Modelo.username,
-                                                    fullWidth: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={6} sm={6} md={6}>
-                                            <CustomInput
-                                                labelText="Nombre 2"
-                                                id="name"
-                                                inputProps={{
-                                                    onChange : this.handleChange
-                                                }}
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={6} sm={6} md={6}>                                            
-                                            <CustomInput
-                                                labelText="Apellido Paterno"
-                                                id="username"
-                                                inputProps={{
-                                                    onChange : this.handleChange
-                                                }}
-                                                formControlProps={{
-                                                    value : "" + Modelo.username,
-                                                    fullWidth: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={6} sm={6} md={6}>
-                                            <CustomInput
-                                                labelText="Apellido Materno"
-                                                id="name"
-                                                inputProps={{
-                                                    onChange : this.handleChange
-                                                }}
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={4} sm={4} md={4}>
+                                <CardBody>   
+                                    <Grid> 
+                                        <GridItem xs={12} sm={12} md={12}>         
                                             <div className={classes.SelectModal}>
                                                 <SelectClass
                                                     labelText="Tipo Documento"
                                                 />
-                                            </div>            
+                                            </div>  
                                         </GridItem>
-                                        <GridItem xs={4} sm={4} md={4}>
+                                        <GridItem xs={12} sm={12} md={12}> 
                                             <div className={classes.SelectModal}>
-                                                <SelectClass />
-                                            </div>            
+                                                <ReactFileReader fileTypes={[".xls",".xlsx"]} base64={true} multipleFiles={false} handleFiles={this.handleFiles}>                                                
+                                                    <Button className={classes.uploadbuton}>Cargar Excel</Button>
+                                                </ReactFileReader>
+                                            </div>  
                                         </GridItem>
-                                        <GridItem xs={4} sm={4} md={4}>
-                                            <div className={classes.SelectModal}>
-                                                <SelectClass
-                                                    labelText="Tipo Documento"
-                                                />
-                                            </div>            
-                                        </GridItem>
-                                        <GridItem xs={6} sm={6} md={6}>
+                                    </Grid>  
+                                    <Table
+                                        tableHeaderColor="primary"
+                                        tableHead={["Red", "Fijo", "Ejecución", "Aguas", "Still s/aguas", "Imperdonables"]}
+                                        tableData={[
+                                            ["Si",
                                             <CustomInput
-                                                labelText="Numero Documento"
+                                                labelText="Fijo"
                                                 inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange,
+                                                }} 
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Ejecución"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
-                                                    fullWidth: true
+                                                    className: classes.formControlInp
                                                 }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={2} sm={2} md={2} />
-                                        <GridItem xs={4} sm={4} md={4}>
-                                            <div className={classes.CheckSpace}>
-                                                <label>
-                                                    Activo :
-                                                    <Checkbox                                                    
-                                                        checkedIcon={<Check className={classes.checkedIcon} />}
-                                                        icon={<Check className={classes.uncheckedIcon} />}
-                                                        classes={{checked: classes.checked}}
-                                                    />
-                                                </label>    
-                                            </div>                                        
-                                        </GridItem>
-                                    </Grid>            
+                                            />,
+                                            <CustomInput
+                                                labelText="Aguas"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Still s/aguas"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Imperdonables"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />],
+                                            ["No",
+                                            <CustomInput
+                                                labelText="Fijo"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange,
+                                                }} 
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Ejecución"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Aguas"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Still s/aguas"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Imperdonables"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />]
+                                        ]}
+                                    />          
                                 </CardBody>
                                 <CardFooter>
                                     <GridItem xs={6} sm={6} md={6} />        

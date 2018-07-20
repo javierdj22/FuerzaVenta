@@ -46,9 +46,9 @@ function Still(props) {
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Lista Tradicional</h4>
+            <h4 className={classes.cardTitleWhite}>Lista Still</h4>
             <p className={classes.cardCategoryWhite}>
-              Agregar, Modificar y Eliminar Tradicional.
+              Agregar, Modificar y Eliminar registros Still.
             </p>
           </CardHeader>
           <CardBody>

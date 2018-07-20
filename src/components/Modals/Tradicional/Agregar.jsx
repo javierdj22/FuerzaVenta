@@ -19,6 +19,7 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
+import Table from "components/Table/Table.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -110,110 +111,156 @@ class App extends React.Component{
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     style={tasksStyle}
-                    contentLabel={"Modal de edicion "}
                     >   
                     <Grid container> 
                         <GridItem xs={12} sm={12} md={12}>
                             <Card plain>
                                 <CardHeader plain color="primary">
-                                    <div className={classes.cardTitleWhite}>Agregar Centro : </div>
+                                    <div className={classes.cardTitleWhite}>Agregar Tradicional : </div>
                                 </CardHeader>
-                                <CardBody> 
-                                    <Grid container> 
-                                        <GridItem xs={6} sm={6} md={6}>                                            
-                                            <CustomInput
-                                                labelText="Nombre 1"
-                                                id="username"
-                                                inputProps={{
-                                                    onChange : this.handleChange
-                                                }}
-                                                formControlProps={{
-                                                    value : "" + Modelo.username,
-                                                    fullWidth: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={6} sm={6} md={6}>
-                                            <CustomInput
-                                                labelText="Nombre 2"
-                                                id="name"
-                                                inputProps={{
-                                                    onChange : this.handleChange
-                                                }}
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={6} sm={6} md={6}>                                            
-                                            <CustomInput
-                                                labelText="Apellido Paterno"
-                                                id="username"
-                                                inputProps={{
-                                                    onChange : this.handleChange
-                                                }}
-                                                formControlProps={{
-                                                    value : "" + Modelo.username,
-                                                    fullWidth: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={6} sm={6} md={6}>
-                                            <CustomInput
-                                                labelText="Apellido Materno"
-                                                id="name"
-                                                inputProps={{
-                                                    onChange : this.handleChange
-                                                }}
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={4} sm={4} md={4}>
+                                <CardBody>   
+                                    <Grid> 
+                                        <GridItem xs={12} sm={12} md={12}>         
                                             <div className={classes.SelectModal}>
                                                 <SelectClass
                                                     labelText="Tipo Documento"
                                                 />
-                                            </div>            
+                                            </div>  
                                         </GridItem>
-                                        <GridItem xs={4} sm={4} md={4}>
+                                        <GridItem xs={12} sm={12} md={12}> 
                                             <div className={classes.SelectModal}>
-                                                <SelectClass />
-                                            </div>            
+                                                <input type="file" onChange={ (e) => this.handleChange(e.target.files) } />
+                                            </div>  
                                         </GridItem>
-                                        <GridItem xs={4} sm={4} md={4}>
-                                            <div className={classes.SelectModal}>
-                                                <SelectClass
-                                                    labelText="Tipo Documento"
-                                                />
-                                            </div>            
-                                        </GridItem>
-                                        <GridItem xs={6} sm={6} md={6}>
+                                    </Grid>  
+                                    <Table
+                                        tableHeaderColor="primary"
+                                        tableHead={["Red", "Fijo", "Vol Imp", "Vol Tot", "Cob Imp", "Ejecución", "Altas / Foco"]}
+                                        tableData={[
+                                            ["Si",
                                             <CustomInput
-                                                labelText="Numero Documento"
+                                                labelText="Fijo"
                                                 inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange,
+                                                }} 
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Vol Imp"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
-                                                    fullWidth: true
+                                                    className: classes.formControlInp
                                                 }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={2} sm={2} md={2} />
-                                        <GridItem xs={4} sm={4} md={4}>
-                                            <div className={classes.CheckSpace}>
-                                                <label>
-                                                    Activo :
-                                                    <Checkbox                                                    
-                                                        checkedIcon={<Check className={classes.checkedIcon} />}
-                                                        icon={<Check className={classes.uncheckedIcon} />}
-                                                        classes={{checked: classes.checked}}
-                                                    />
-                                                </label>    
-                                            </div>                                        
-                                        </GridItem>
-                                    </Grid>            
+                                            />,
+                                            <CustomInput
+                                                labelText="Vol Tot"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Cob Imp"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Ejecución"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Altas / Foco"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />],
+                                            ["No",
+                                            <CustomInput
+                                                labelText="Fijo"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange,
+                                                }} 
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Vol Imp"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Vol Tot"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Cob Imp"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Ejecución"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />,
+                                            <CustomInput
+                                                labelText="Altas / Foco"
+                                                inputProps={{
+                                                    // value : "" + Modelo.latitud,
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    className: classes.formControlInp
+                                                }}
+                                            />]
+                                        ]}
+                                    />          
                                 </CardBody>
                                 <CardFooter>
                                     <GridItem xs={6} sm={6} md={6} />        

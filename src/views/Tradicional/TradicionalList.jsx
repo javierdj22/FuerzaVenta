@@ -109,16 +109,7 @@ class PersonList extends Component {
                 </div>     
             </GridItem>
             <GridItem xs={0} sm={0} md={0}>
-                <Tooltip
-                    id="tooltip-top"
-                    title="Plantilla Excel"
-                    placement="top"
-                    classes={{ tooltip: classes.tooltip }}
-                    >       
-                        <Button color="white" aria-label="edit" justIcon round className={classes.agregar}>
-                                <img src={Excel} alt="Plantilla Excel" height="18" className={classes.img} />
-                        </Button>                        
-                </Tooltip>
+                <ExcelModal objCentro={this.state.persons} Add={true} />
             </GridItem>
             <GridItem xs={0} sm={0} md={0}>
                 <AgregarModal parentFlatList={this} />

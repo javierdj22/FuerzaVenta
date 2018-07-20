@@ -102,38 +102,20 @@ class App extends React.Component{
     }
 
     render(){
-        const { classes, objCentro } = this.props;
+        const { classes, objCentro, Add } = this.props;
         const { Modelo } = this.state;
-        const data1 = [
-            {
-              foo: '123',
-              bar: '456',
-              baz: '789'
-            },
-            {
-              foo: 'abc',
-              bar: 'dfg',
-              baz: 'hij'
-            },
-            {
-              foo: 'aaa',
-              bar: 'bbb',
-              baz: 'ccc'
-            }
-          ]
-           
-        const data2 = [
-            {
-              aaa: 1,
-              bbb: 2,
-              ccc: 3
-            },
-            {
-              aaa: 4,
-              bbb: 5,
-              ccc: 6
-            }
-        ]
+        const data1 = []   
+        var ClassExcel = null;
+        if (Add == true){
+            ClassExcel = <Button color="white" aria-label="edit" justIcon round className={classes.agregar}>
+                            <img src={Excel} alt="Plantilla Excel" height="18" className={classes.img} />
+                         </Button>
+        }else{
+            ClassExcel = <IconButton aria-label="Edit" className={classes.tableActionButton}>
+                            <img src={Excel} alt={"Descargar Excel - "+ objCentro.name} height="18" className={classes.img} />
+                         </IconButton>
+
+        }         
         return (
             <div>
                 <Tooltip
@@ -142,24 +124,13 @@ class App extends React.Component{
                     placement="top"
                     classes={{ tooltip: classes.tooltip }}
                     >             
-                        <Workbook filename="example.xlsx" element={
-                            <IconButton
-                                aria-label="Edit"                
-                                className={classes.tableActionButton}
-                                >
-                                <img src={Excel} alt={"Descargar Excel - "+ objCentro.name} height="18" className={classes.img} />
-                            </IconButton>
-                        }>
-                        <Workbook.Sheet data={data1} name="Sheet A">
-                            <Workbook.Column label="Foo" value="foo"/>
-                            <Workbook.Column label="Bar" value="bar"/>
-                        </Workbook.Sheet>
-                        <Workbook.Sheet data={data2} name="Another sheet">
-                            <Workbook.Column label="Double aaa" value={row => row.aaa * 2}/>
-                            <Workbook.Column label="Cubed ccc " value={row => Math.pow(row.ccc, 3)}/>
+                        <Workbook filename="PlantillaTradicional.xlsx" element={ClassExcel}>
+                        <Workbook.Sheet data={data1} name="Hoja1">
+                            <Workbook.Column label="Foo" value="% Cumpl."/>
+                            <Workbook.Column label="Bar" value="% Variab. Vol"/>
+                            <Workbook.Column label="Bar" value="% Variab. RED"/>
                         </Workbook.Sheet>
                         </Workbook>
-
                 </Tooltip>
                 <Modal
                     isOpen={this.state.modalIsOpen}

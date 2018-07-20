@@ -27,6 +27,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Check from "@material-ui/icons/Check";
 import SelectClass from "../../Select/Select";
 import Excel from "assets/img/ExcelIcon.png";
+import axios from 'axios';
 
 import Workbook from 'react-excel-workbook'
 
@@ -51,6 +52,27 @@ class App extends React.Component{
         this.Editar = this.Editar.bind(this);
     }
 
+    componentDidMount() {
+        var config = {
+            headers: {  
+                'Access-Control-Allow-Origin': '*'
+            }, 
+            withCredentials : false, 
+            Credentials: true 
+          };
+        //axios.get(`http://red.lindley.pe/fvcdaapi/api/Centro/Listar/3`, config)
+        //axios.get(`http://192.168.80.254:8080/api/Centro/Listar/3`, config)
+        axios.get('https://jsonplaceholder.typicode.com/users', config)
+        .then(res => { 
+            const persons = res.data;//.Data;
+            this.setState({ persons });
+        })  
+        .catch(function (error) {
+            // handle error 
+            console.log(error);    
+        })
+    } 
+    
     openModal = recibe => () =>
     {
         this.setState({modalIsOpen: true});
@@ -103,35 +125,42 @@ class App extends React.Component{
 
     render(){
         const { classes, objCentro, Add } = this.props;
-        const { Modelo } = this.state;
-        const data1 = []   
+        const { Modelo, persons } = this.state;
         var ClassExcel = null;
+        var ListExcel = [];
         if (Add == true){
-            ClassExcel = <Button color="white" aria-label="edit" justIcon round className={classes.agregar}>
-                            <img src={Excel} alt="Plantilla Excel" height="18" className={classes.img} />
-                         </Button>
+            ClassExcel  =   <Tooltip
+                            id="tooltip-top"
+                            title={"Plantilla Excel"}
+                            placement="top"
+                            classes={{ tooltip: classes.tooltip }}
+                            >   
+                                <Button color="white" aria-label="Agregar" justIcon round className={classes.agregar}>
+                                    <img src={Excel} alt="Plantilla Excel" height="18" className={classes.img} />
+                                </Button>
+                            </Tooltip>
         }else{
-            ClassExcel = <IconButton aria-label="Edit" className={classes.tableActionButton}>
-                            <img src={Excel} alt={"Descargar Excel - "+ objCentro.name} height="18" className={classes.img} />
-                         </IconButton>
-
+            ListExcel   =   persons
+            ClassExcel  =   <Tooltip
+                            id="tooltip-top"
+                            title={"Descargar Excel - "+ objCentro.name}
+                            placement="top"
+                            classes={{ tooltip: classes.tooltip }}
+                            >                 
+                                <IconButton aria-label="Edit" className={classes.tableActionButton}>
+                                    <img src={Excel} alt={"Descargar Excel - "+ objCentro.name} height="18" className={classes.img} />
+                                </IconButton>
+                            </Tooltip>
         }         
         return (
-            <div>
-                <Tooltip
-                    id="tooltip-top"
-                    title={"Descargar Excel - "+ objCentro.name}
-                    placement="top"
-                    classes={{ tooltip: classes.tooltip }}
-                    >             
-                        <Workbook filename="PlantillaTradicional.xlsx" element={ClassExcel}>
-                        <Workbook.Sheet data={data1} name="Hoja1">
-                            <Workbook.Column label="Foo" value="% Cumpl."/>
-                            <Workbook.Column label="Bar" value="% Variab. Vol"/>
-                            <Workbook.Column label="Bar" value="% Variab. RED"/>
-                        </Workbook.Sheet>
-                        </Workbook>
-                </Tooltip>
+            <div>        
+                <Workbook filename="PlantillaTradicional.xlsx" element={ClassExcel}>
+                <Workbook.Sheet data={ListExcel} name="Hoja1">
+                    <Workbook.Column label="% Cumpl."      value="name"  />
+                    <Workbook.Column label="% Variab. Vol" value="name"  />
+                    <Workbook.Column label="% Variab. RED" value="name"  />
+                </Workbook.Sheet>
+                </Workbook>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}

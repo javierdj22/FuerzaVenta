@@ -7,11 +7,12 @@ import Table from "components/Table/Table.jsx";
 import tasksStyle from "assets/jss/material-dashboard-react/components/tasksStyle.jsx";
 
 // components
-import EditarModal   from "components/Modals/Centro/Editar";
-import EliminarModal from "components/Modals/Centro/Eliminar";
-import AgregarModal  from 'components/Modals/Centro/Agregar';
+import EditarModal   from "components/Modals/Usuario/Editar";
+import EliminarModal from "components/Modals/Usuario/Eliminar";
+import AgregarCentro from 'components/Modals/Usuario/Agregar';
+
 import GridItem from "components/Grid/GridItem.jsx";
-import SelectClass from '../Select/Select';
+import SelectClass from 'components/Select/Select';
 
 // core 
 import Checkbox from "@material-ui/core/Checkbox";
@@ -71,7 +72,7 @@ class PersonList extends Component {
     const index = this.state.persons.findIndex((emp) => emp.id === ObjReturn.id);
     const person = update(this.state.persons, {$splice: [[index, 1, ObjReturn]]}); 
     this.setState({persons: person});
- 
+
   }
 
   EliminarRegistro(ObjReturn){
@@ -96,36 +97,19 @@ class PersonList extends Component {
                 }} onChange={this.searchUpdated} />
             </GridItem>
             <GridItem xs={3} sm={3} md={3} >
-                <div  className={classes.SelectMenu}>
-                    <SelectClass/> 
-                </div>
+                <div className={classes.SelectMenu}>
+                    <SelectClass />
+                </div>     
             </GridItem>
             <GridItem xs={1} sm={1} md={1}>
-                <AgregarModal parentFlatList={this} />
+                <AgregarCentro parentFlatList={this} />
             </GridItem>
         </Grid>   
         <Table
             tableHeaderColor="primary"
-            tableHead={["Nombre Centro", "Codigo", "Fecha Registro", "Estado", "", ""]}
+            tableHead={["Figura", "ID", "Nombre Usuario", "FechaReg.", "Activo", ""]}
             tableData={
-            filteredEmails.map(persons =>[persons.name, persons.username, persons.email
-            ,<Tooltip
-                id="tooltip-top"
-                title={persons.username}
-                placement="top"
-                classes={{ tooltip: classes.tooltip }}
-            >
-                <Checkbox
-                checked={false}
-                //tabIndex={-1}
-                // onClick={this.handleToggle(1)}
-                checkedIcon={<Check className={classes.checkedIcon} />}
-                icon={<Check className={classes.uncheckedIcon} />}
-                classes={{
-                    checked: classes.checked
-                }}
-                />
-            </Tooltip>,
+            filteredEmails.map(persons =>[persons.name, persons.id, persons.username, persons.phone ,
             <EditarModal objCentro={persons} parentFlatList={this} />,
             <EliminarModal objCentro={persons} parentFlatList={this} 
             key={persons.id} />

@@ -175,7 +175,7 @@ input[type="Select"]{
 } 
 .rc-select{
     width: 95%;
-    padding: 6px 0 7px;
+    /*  padding: 30px 0px 0px 0px; */
 }
 .rc-select-selection {
     height: 35px;
@@ -185,20 +185,22 @@ input[type="Select"]{
   border-color: #d9012e;
 }
 .rc-select-selection--single .rc-select-selection__clear {
-    top: 0;
-    right: 1px;
-    background: #d9012e;
+    background: #ff3b64;
     border-radius: 20px;
-    width: 15px;
-    padding: 5px 5px;
+    width: 20px;
+    padding: 3px 2px;
+    margin: 1px 0;
     height: 15px;
-    border: 1px solid #960523;
+    border: 1px solid #c9022b;
     z-index: 1;
+    height: 15px;
+    cursor: pointer;
+    padding: 5px 0px 0px 0px;
 }
 .rc-select-selection__clear:after {
     color: #fff;
-    top: -1px;
-    left: 9px;
+    top: -2px;
+    left: 6px;
     position: absolute;
 }
 legend {

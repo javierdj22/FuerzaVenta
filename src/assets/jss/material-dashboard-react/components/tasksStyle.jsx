@@ -70,6 +70,14 @@ const tasksStyle = {
     padding               : '0px',
     transform             : 'translate(-50%, -50%)',
   },
-  
+  CheckSpace:{ 
+    padding               : '30px 0px 0px 0px',
+  },
+  SelectMenu:{
+    padding               : '15px 0px 0px 0px',
+  },
+  SelectModal:{
+    padding               : '25px 0px 0px 0px',
+  },
 };
 export default tasksStyle;

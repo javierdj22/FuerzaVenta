@@ -15,7 +15,7 @@ import tasksStyle from "assets/jss/material-dashboard-react/components/tasksStyl
 
 import Grid from "@material-ui/core/Grid";
 // core components
-import GridItem from "components/Grid/GridItem.jsx";
+import GridItem from "components/Grid/GridItem.jsx"; 
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
@@ -25,6 +25,10 @@ import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Checkbox from "@material-ui/core/Checkbox";
 import Check from "@material-ui/icons/Check";
+import SelectClass from "../../Select/Select";
+import Excel from "assets/img/ExcelIcon.png";
+
+import Workbook from 'react-excel-workbook'
 
 Modal.setAppElement("#root");
 
@@ -36,6 +40,7 @@ class App extends React.Component{
             modalIsOpen : false,
             objCentro : {},
             Modelo : {},
+            isChecked: true,
             clasess : this.props
         };
       
@@ -43,6 +48,7 @@ class App extends React.Component{
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.Editar = this.Editar.bind(this);
     }
 
     openModal = recibe => () =>
@@ -75,43 +81,85 @@ class App extends React.Component{
         this.setState({modalIsOpen: false});
     }
 
-    CentroEdit(event){
+    Editar(event){
         event.preventDefault();
+        var id = this.state.Modelo.id;
+        var name = this.state.Modelo.name;
         var username = this.state.Modelo.username;
         //var username = this.state.Modelo.username;
         //var username = this.state.Modelo.username;
         //var username = this.state.Modelo.username;
-        //var username = this.state.Modelo.username;
-        this.ObjReturn ={ username };
+        //this.ObjReturn ={ username, name, id };
 
-        this.props.parentFlatList.EditCentros(this.ObjReturn);
+        this.props.parentFlatList.EditRegistro(this.state.Modelo);
 
         this.setState({modalIsOpen: false});
+    }
+    toggleChange = () => {
+      this.setState({
+        isChecked: !this.state.isChecked,
+      });
     }
 
     render(){
         const { classes, objCentro } = this.props;
         const { Modelo } = this.state;
+        const data1 = [
+            {
+              foo: '123',
+              bar: '456',
+              baz: '789'
+            },
+            {
+              foo: 'abc',
+              bar: 'dfg',
+              baz: 'hij'
+            },
+            {
+              foo: 'aaa',
+              bar: 'bbb',
+              baz: 'ccc'
+            }
+          ]
+           
+        const data2 = [
+            {
+              aaa: 1,
+              bbb: 2,
+              ccc: 3
+            },
+            {
+              aaa: 4,
+              bbb: 5,
+              ccc: 6
+            }
+        ]
         return (
             <div>
                 <Tooltip
                     id="tooltip-top"
-                    title="Editar"
+                    title={"Descargar Excel - "+ objCentro.name}
                     placement="top"
                     classes={{ tooltip: classes.tooltip }}
                     >             
-                        <IconButton
-                            aria-label="Edit"                
-                            className={classes.tableActionButton}
-                            id={objCentro}
-                            onClick={this.openModal(objCentro)}
-                            >
-                            <Edit                  
-                                className={
-                                    classes.tableActionButtonIcon + " " + classes.edit
-                                }
-                            />
-                        </IconButton>                    
+                        <Workbook filename="example.xlsx" element={
+                            <IconButton
+                                aria-label="Edit"                
+                                className={classes.tableActionButton}
+                                >
+                                <img src={Excel} alt={"Descargar Excel - "+ objCentro.name} height="18" className={classes.img} />
+                            </IconButton>
+                        }>
+                        <Workbook.Sheet data={data1} name="Sheet A">
+                            <Workbook.Column label="Foo" value="foo"/>
+                            <Workbook.Column label="Bar" value="bar"/>
+                        </Workbook.Sheet>
+                        <Workbook.Sheet data={data2} name="Another sheet">
+                            <Workbook.Column label="Double aaa" value={row => row.aaa * 2}/>
+                            <Workbook.Column label="Cubed ccc " value={row => Math.pow(row.ccc, 3)}/>
+                        </Workbook.Sheet>
+                        </Workbook>
+
                 </Tooltip>
                 <Modal
                     isOpen={this.state.modalIsOpen}
@@ -128,25 +176,24 @@ class App extends React.Component{
                                 </CardHeader>
                                 <CardBody> 
                                     <Grid container> 
-                                        <GridItem xs={4} sm={4} md={4}>                                            
+                                        <GridItem xs={6} sm={6} md={6}>                                            
                                             <CustomInput
-                                                labelText="Codigo"
+                                                labelText="Nombre 1"
                                                 id="username"
                                                 inputProps={{
-                                                    value : "" + Modelo.username,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
+                                                    value : "" + Modelo.username,
                                                     fullWidth: true
                                                 }}
                                             />
                                         </GridItem>
-                                        <GridItem xs={8} sm={8} md={8}>
+                                        <GridItem xs={6} sm={6} md={6}>
                                             <CustomInput
-                                                labelText="Nombre"
+                                                labelText="Nombre 2"
                                                 id="name"
                                                 inputProps={{
-                                                    value : "" + Modelo.name,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
@@ -154,25 +201,24 @@ class App extends React.Component{
                                                 }}
                                             />
                                         </GridItem>
-                                        <GridItem xs={6} sm={6} md={6}>
+                                        <GridItem xs={6} sm={6} md={6}>                                            
                                             <CustomInput
-                                                labelText="Logitud"
-                                                id="logitud"
+                                                labelText="Apellido Paterno"
+                                                id="username"
                                                 inputProps={{
-                                                    // value : "" + Modelo.logitud,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
+                                                    value : "" + Modelo.username,
                                                     fullWidth: true
                                                 }}
                                             />
                                         </GridItem>
                                         <GridItem xs={6} sm={6} md={6}>
                                             <CustomInput
-                                                labelText="Latitud"
-                                                id="latitud"
+                                                labelText="Apellido Materno"
+                                                id="name"
                                                 inputProps={{
-                                                    // value : "" + Modelo.latitud,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
@@ -181,28 +227,62 @@ class App extends React.Component{
                                             />
                                         </GridItem>
                                         <GridItem xs={4} sm={4} md={4}>
-                                            <label>
-                                                Activo :
-                                                <Checkbox                                                    
-                                                    checkedIcon={<Check className={classes.checkedIcon} />}
-                                                    icon={<Check className={classes.uncheckedIcon} />}
-                                                    classes={{checked: classes.checked}}
+                                            <div className={classes.SelectModal}>
+                                                <SelectClass
+                                                    labelText="Tipo Documento"
                                                 />
-                                            </label>                                            
+                                            </div>            
+                                        </GridItem>
+                                        <GridItem xs={4} sm={4} md={4}>
+                                            <div className={classes.SelectModal}>
+                                                <SelectClass />
+                                            </div>            
+                                        </GridItem>
+                                        <GridItem xs={4} sm={4} md={4}>
+                                            <div className={classes.SelectModal}>
+                                                <SelectClass
+                                                    labelText="Tipo Documento"
+                                                />
+                                            </div>            
+                                        </GridItem>
+                                        <GridItem xs={6} sm={6} md={6}>
+                                            <CustomInput
+                                                labelText="Numero Documento"
+                                                inputProps={{
+                                                    onChange : this.handleChange
+                                                }}
+                                                formControlProps={{
+                                                    fullWidth: true
+                                                }}
+                                            />
+                                        </GridItem>
+                                        <GridItem xs={2} sm={2} md={2} />
+                                        <GridItem xs={4} sm={4} md={4}>
+                                            <div className={classes.CheckSpace}>
+                                                <label>
+                                                    Activo :
+                                                    <Checkbox                                                    
+                                                        checkedIcon={<Check className={classes.checkedIcon} />}
+                                                        icon={<Check className={classes.uncheckedIcon} />}
+                                                        classes={{checked: classes.checked}}
+                                                    />
+                                                </label>    
+                                            </div>                                        
                                         </GridItem>
                                     </Grid>            
                                 </CardBody>
                                 <CardFooter>
-                                    <GridItem xs={8} sm={8} md={8}>                                           
-                                    </GridItem>
-                                    <GridItem xs={4} sm={4} md={4}> 
-                                        <Button                                        
+                                    <GridItem xs={6} sm={6} md={6} />        
+                                    <GridItem xs={3} sm={3} md={3}> 
+                                        <Button                                   
                                             color="primary"
-                                            onClick={this.closeModal}
+                                            onClick={this.Editar}
                                         >
                                             Aceptar
-                                        </Button>  
-                                        <Button                                         
+                                        </Button>                                           
+                                    </GridItem>
+                                    <GridItem xs={3} sm={3} md={3}> 
+                                        <Button                                        
                                             color="danger"
                                             onClick={this.closeModal}
                                         >

@@ -44,6 +44,8 @@
   },
   "homepage": "https://creativetimofficial.github.io/material-dashboard-react/#/dashboard",
   "devDependencies": {
-    "rc-select": "^8.1.0"
+    "immutability-helper": "^2.7.1",
+    "rc-select": "^8.1.0",
+    "react-excel-workbook": "0.0.4"
   }
 }

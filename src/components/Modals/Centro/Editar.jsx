@@ -25,7 +25,6 @@ import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Checkbox from "@material-ui/core/Checkbox";
 import Check from "@material-ui/icons/Check";
-import PersonAdd from "@material-ui/icons/PersonAdd";
 
 Modal.setAppElement("#root");
 
@@ -35,9 +34,9 @@ class App extends React.Component{
 
         this.state = { 
             modalIsOpen : false,
-            Modelo : {
-                username : "",
-                name : ""},
+            objCentro : {},
+            Modelo : {},
+            isChecked: true,
             clasess : this.props
         };
       
@@ -45,21 +44,20 @@ class App extends React.Component{
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.addCentros = this.addCentros.bind(this);
-        this.ObjReturn = {};
-        
+        this.Editar = this.Editar.bind(this);
     }
 
-    openModal(){
+    openModal = recibe => () =>
+    {
         this.setState({modalIsOpen: true});
     }
 
     afterOpenModal() {
         // references are now sync'd and can be accessed.
         // this.subtitle.style.color = '#d9012e';
+        const {objCentro} = this.props;
         
-        
-        //this.setState({Modelo : Obj})
+        this.setState({Modelo : objCentro})
     }
 
     
@@ -79,45 +77,63 @@ class App extends React.Component{
         this.setState({modalIsOpen: false});
     }
 
-    addCentros(event){
+    Editar(event){
         event.preventDefault();
+        var id = this.state.Modelo.id;
+        var name = this.state.Modelo.name;
         var username = this.state.Modelo.username;
-        this.ObjReturn ={ username };
+        //var username = this.state.Modelo.username;
+        //var username = this.state.Modelo.username;
+        //var username = this.state.Modelo.username;
+        //this.ObjReturn ={ username, name, id };
 
-        this.props.parentFlatList.AddCentros(this.ObjReturn);
+        this.props.parentFlatList.EditRegistro(this.state.Modelo);
 
         this.setState({modalIsOpen: false});
     }
+    toggleChange = () => {
+      this.setState({
+        isChecked: !this.state.isChecked,
+      });
+    }
 
     render(){
-        const { classes } = this.props;
+        const { classes, objCentro } = this.props;
         const { Modelo } = this.state;
-        const { ObjReturn } = this.ObjReturn;
         return (
             <div>
                 <Tooltip
                     id="tooltip-top"
-                    title="Agregar"
+                    title="Editar"
                     placement="top"
                     classes={{ tooltip: classes.tooltip }}
-                    >       
-                        <Button color="white" aria-label="edit" justIcon round className={classes.agregar}
-                                onClick={this.openModal}>
-                                <PersonAdd />
-                        </Button>                        
+                    >             
+                        <IconButton
+                            aria-label="Edit"                
+                            className={classes.tableActionButton}
+                            id={objCentro}
+                            key={objCentro.id}
+                            onClick={this.openModal(objCentro)}
+                            >
+                            <Edit                  
+                                className={
+                                    classes.tableActionButtonIcon + " " + classes.edit
+                                }
+                            />
+                        </IconButton>                    
                 </Tooltip>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     style={tasksStyle}
-                    contentLabel={"Modal de edicion "}
-                    >   
+                    contentLabel={"Modal de edicion " + objCentro}
+                    >
                     <Grid container> 
                         <GridItem xs={12} sm={12} md={12}>
                             <Card plain>
                                 <CardHeader plain color="primary">
-                                    <div className={classes.cardTitleWhite}>Agregar Centro : </div>
+                                    <div className={classes.cardTitleWhite}>Modificar Centro : </div>
                                 </CardHeader>
                                 <CardBody> 
                                     <Grid container> 
@@ -126,10 +142,10 @@ class App extends React.Component{
                                                 labelText="Codigo"
                                                 id="username"
                                                 inputProps={{
+                                                    value : "" + Modelo.username,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
-                                                    value : "" + Modelo.username,
                                                     fullWidth: true
                                                 }}
                                             />
@@ -139,6 +155,7 @@ class App extends React.Component{
                                                 labelText="Nombre"
                                                 id="name"
                                                 inputProps={{
+                                                    value : "" + Modelo.name,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
@@ -151,6 +168,7 @@ class App extends React.Component{
                                                 labelText="Logitud"
                                                 id="logitud"
                                                 inputProps={{
+                                                    // value : "" + Modelo.logitud,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
@@ -163,6 +181,7 @@ class App extends React.Component{
                                                 labelText="Latitud"
                                                 id="latitud"
                                                 inputProps={{
+                                                    // value : "" + Modelo.latitud,
                                                     onChange : this.handleChange
                                                 }}
                                                 formControlProps={{
@@ -177,6 +196,11 @@ class App extends React.Component{
                                                     checkedIcon={<Check className={classes.checkedIcon} />}
                                                     icon={<Check className={classes.uncheckedIcon} />}
                                                     classes={{checked: classes.checked}}
+                                                    checked={this.state.isChecked}
+                                                    onChange={this.toggleChange}
+                                                    inputProps={{
+                                                        value : "" + Modelo.Estado
+                                                    }}
                                                 />
                                             </label>                                            
                                         </GridItem>
@@ -186,14 +210,13 @@ class App extends React.Component{
                                     <GridItem xs={8} sm={8} md={8}>                                           
                                     </GridItem>
                                     <GridItem xs={4} sm={4} md={4}> 
-                                        <Button              
-                                            Types="Submit"                          
+                                        <Button                                        
                                             color="primary"
-                                            onClick={this.addCentros}
+                                            onClick={this.Editar}
                                         >
                                             Aceptar
                                         </Button>  
-                                        <Button                                        
+                                        <Button                                         
                                             color="danger"
                                             onClick={this.closeModal}
                                         >
@@ -203,7 +226,7 @@ class App extends React.Component{
                                 </CardFooter>
                             </Card>
                         </GridItem>
-                    </Grid>      
+                    </Grid>                    
                 </Modal> 
             </div>                                     
         );
@@ -212,4 +235,4 @@ class App extends React.Component{
 
 
 
-export default withStyles(tasksStyle)(App, this.ObjReturn);
+export default withStyles(tasksStyle)(App);

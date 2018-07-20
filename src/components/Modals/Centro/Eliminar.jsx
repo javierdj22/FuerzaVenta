@@ -41,6 +41,7 @@ class App extends React.Component{
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.Eliminar = this.Eliminar.bind(this);
     }
 
     openModal = recibe => () =>
@@ -72,7 +73,13 @@ class App extends React.Component{
     closeModal() {
         this.setState({modalIsOpen: false});
     }
+    
+    Eliminar(event){
+        event.preventDefault(); 
+        this.props.parentFlatList.EliminarRegistro(this.state.Modelo);
 
+        this.setState({modalIsOpen: false});
+    }
     render(){
         const { classes, objCentro } = this.props;
         const { Modelo } = this.state;
@@ -126,7 +133,8 @@ class App extends React.Component{
                                         <GridItem xs={9} sm={9} md={9}>   
                                         <Button                                        
                                             color="primary"
-                                            onClick={this.closeModal}
+                                            onClick={this.Eliminar}
+                                            key={objCentro.id}
                                         >
                                             Confirmar
                                         </Button>  

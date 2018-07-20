@@ -7,18 +7,16 @@ import Table from "components/Table/Table.jsx";
 import tasksStyle from "assets/jss/material-dashboard-react/components/tasksStyle.jsx";
 
 // components
-
-import ExcelModal    from "components/Excel/Tradicional/Excel";
-import EditarModal   from "components/Modals/Tradicional/Editar";
-import EliminarModal from "components/Modals/Tradicional/Eliminar";
-import AgregarModal  from 'components/Modals/Tradicional/Agregar';
+import ExcelModal    from "components/Excel/Still/Excel";
+import EditarModal   from "components/Modals/Still/Editar";
+import EliminarModal from "components/Modals/Still/Eliminar";
+import AgregarModal  from 'components/Modals/Still/Agregar';
 
 
 import GridItem from "components/Grid/GridItem.jsx";
 import SelectClass from 'components/Select/Select'; 
 
 // core 
-import Button from "components/CustomButtons/Button.jsx";
 import Checkbox from "@material-ui/core/Checkbox";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -26,7 +24,6 @@ import Check from "@material-ui/icons/Check";
 import Grid from "@material-ui/core/Grid";
 import SearchInput, {createFilter} from 'react-search-input'
 import update from 'immutability-helper';
-import Excel from "assets/img/ExcelIcon.png";
 
 const KEYS_TO_FILTERS = ['name', 'username', 'id']
 
@@ -47,8 +44,6 @@ class PersonList extends Component {
         withCredentials : false, 
         Credentials: true 
       };
-    //axios.get(`http://red.lindley.pe/fvcdaapi/api/Centro/Listar/3`, config)
-    //axios.get(`http://192.168.80.254:8080/api/Centro/Listar/3`, config)
     axios.get('https://jsonplaceholder.typicode.com/users', config)
     .then(res => { 
         const persons = res.data;//.Data;
@@ -109,16 +104,7 @@ class PersonList extends Component {
                 </div>     
             </GridItem>
             <GridItem xs={0} sm={0} md={0}>
-                <Tooltip
-                    id="tooltip-top"
-                    title="Plantilla Excel"
-                    placement="top"
-                    classes={{ tooltip: classes.tooltip }}
-                    >       
-                        <Button color="white" aria-label="edit" justIcon round className={classes.agregar}>
-                                <img src={Excel} alt="Plantilla Excel" height="18" className={classes.img} />
-                        </Button>                        
-                </Tooltip>
+                <ExcelModal objCentro={this.state.persons} Add={true} />
             </GridItem>
             <GridItem xs={0} sm={0} md={0}>
                 <AgregarModal parentFlatList={this} />

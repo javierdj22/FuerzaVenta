@@ -79,6 +79,12 @@ const tasksStyle = {
   SelectModal:{
     padding               : '25px 0px 0px 0px',
   },
+  IconExcel:{
+    padding               : '35px 0px 0px 0px',
+  },
+  TextExcel:{
+    padding               : '15px 0px 0px 0px',
+  },  
   formControlInp:{
     width: "90px",
     margin: "0px -20px 0px 0px"

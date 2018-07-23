@@ -11,6 +11,7 @@ import Modal from 'react-modal';
 import Tooltip from "@material-ui/core/Tooltip";
 import tasksStyle from "assets/jss/material-dashboard-react/components/tasksStyle.jsx";
 
+import axios from 'axios';
 import Grid from "@material-ui/core/Grid";
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
@@ -22,13 +23,11 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import Table from "components/Table/Table.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Checkbox from "@material-ui/core/Checkbox";
-import Check from "@material-ui/icons/Check";
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import SelectClass from "../../Select/Select";
 import ReactFileReader from 'react-file-reader';
-import XLSX from 'xlsx';
 
+import readXlsxFile from 'read-excel-file'
 Modal.setAppElement("#root");
 
 class App extends React.Component{
@@ -37,38 +36,27 @@ class App extends React.Component{
 
         this.state = { 
             modalIsOpen : false,
+            modalIsOpen2 : false,
             Modelo : {
                 username : "",
                 name : ""},
-            clasess : this.props
+            clasess : this.props,
+            ObjImpExcel : [],
+            NombreExcel : "Selectionar Archivo Excel"
         };
       
         this.openModal = this.openModal.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.Agregar = this.Agregar.bind(this);
-        this.handleFiles = this.handleFiles.bind(this);        
-        this.ObjReturn = {};
-        
+        this.FileUploadChange = this.FileUploadChange.bind(this);  
+        this.closeModal2 = this.closeModal2.bind(this);        
     }
 
     openModal(){
+        this.state.NombreExcel = "Selectionar Archivo Excel";
         this.setState({modalIsOpen: true});
     }
-
-    afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        // this.subtitle.style.color = '#d9012e';
-        
-        
-        //this.setState({Modelo : Obj})
-    }
-
-    handleFiles = (files) => {
-        console.log(files.base64)
-      }
-
 
     handleChange(event) {
         var obj = {...this.state.Modelo}; // recuperar el Modelo del estado
@@ -80,11 +68,24 @@ class App extends React.Component{
         this.setState({Modelo: obj});
     }
 
-
+    FileUploadChange = (files) => {
+        const NomExcel = files[0].name;
+        this.setState({modalIsOpen2: true});
+        readXlsxFile(files[0]).then((rows) => {
+            const ImpExcel = rows.filter(p => p["0"] != "% Cumpl.")
+            this.setState({
+                ObjImpExcel : ImpExcel
+                , NombreExcel : NomExcel
+            })
+        })
+    }
     closeModal() {        
         this.setState({modalIsOpen: false});
     }
-
+    closeModal2() {        
+        this.setState({modalIsOpen2: false});
+    }
+    
     Agregar(event){
         event.preventDefault();
         var username = this.state.Modelo.username;
@@ -97,8 +98,7 @@ class App extends React.Component{
 
     render(){
         const { classes } = this.props;
-        const { Modelo } = this.state;
-        const { ObjReturn } = this.ObjReturn;
+        const { Modelo, NombreExcel, ObjImpExcel } = this.state;
         return (
             <div>
                 <Tooltip
@@ -114,7 +114,6 @@ class App extends React.Component{
                 </Tooltip>
                 <Modal
                     isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     style={tasksStyle}
                     contentLabel={"Modal de edicion "}
@@ -126,7 +125,7 @@ class App extends React.Component{
                                     <div className={classes.cardTitleWhite}>Agregar Still : </div>
                                 </CardHeader>
                                 <CardBody>   
-                                    <Grid> 
+                                    <Grid container>       
                                         <GridItem xs={12} sm={12} md={12}>         
                                             <div className={classes.SelectModal}>
                                                 <SelectClass
@@ -134,14 +133,51 @@ class App extends React.Component{
                                                 />
                                             </div>  
                                         </GridItem>
-                                        <GridItem xs={12} sm={12} md={12}> 
+                                        <GridItem xs={3} sm={3} md={3}> 
                                             <div className={classes.SelectModal}>
-                                                <ReactFileReader fileTypes={[".xls",".xlsx"]} base64={true} multipleFiles={false} handleFiles={this.handleFiles}>                                                
+                                                <ReactFileReader fileTypes={[".xls",".xlsx"]} base64={false} multipleFiles={false} handleFiles={this.FileUploadChange}>
                                                     <Button className={classes.uploadbuton}>Cargar Excel</Button>
-                                                </ReactFileReader>
-                                            </div>  
+                                                </ReactFileReader> 
+                                            </div>     
+                                        </GridItem>           
+                                        <GridItem xs={8} sm={8} md={8}> 
+                                            <div className={classes.TextExcel}>    
+                                                <h4 className={classes.cardTitle}>{NombreExcel}</h4> 
+                                            </div>     
                                         </GridItem>
-                                    </Grid>  
+                                        <GridItem xs={12} sm={12} md={12}> 
+                                            <Modal
+                                                isOpen={this.state.modalIsOpen2}
+                                                onRequestClose={this.closeModal2}
+                                                style={tasksStyle}
+                                                contentLabel={"Modal de edicion "}
+                                                >   
+                                                <Card>
+                                                    <CardHeader plain color="primary">
+                                                        <div className={classes.cardTitleWhite}>Validar Data de Excel : {NombreExcel} </div>
+                                                    </CardHeader>
+                                                    <CardBody>   
+                                                        <Table
+                                                            tableHeaderColor="primary"
+                                                            tableHead={["% Cumpl.", "% Variab. Vol", "% Variab. RED"]}
+                                                            tableData={
+                                                            this.state.ObjImpExcel.map(p =>[p[0], p[1], p[2]])}
+                                                        />
+                                                    </CardBody>
+                                                    <CardFooter>
+                                                        <GridItem xs={3} sm={3} md={3}> 
+                                                            <Button                                        
+                                                                color="danger"
+                                                                onClick={this.closeModal2}
+                                                            >
+                                                                Data Ok
+                                                            </Button>                                        
+                                                        </GridItem>
+                                                    </CardFooter>
+                                                </Card>
+                                            </Modal> 
+                                        </GridItem> 
+                                    </Grid>     
                                     <Table
                                         tableHeaderColor="primary"
                                         tableHead={["Red", "Fijo", "Ejecución", "Aguas", "Still s/aguas", "Imperdonables"]}

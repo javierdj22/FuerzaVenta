@@ -107,10 +107,10 @@ class PersonList extends Component {
                     <SelectClass />
                 </div>     
             </GridItem>
-            <GridItem xs={1} sm={1} md={1}>
+            <GridItem xs={0} sm={0} md={0}>
                 <ExcelModal objCentro={this.state.persons} Add={true} />
             </GridItem>
-            <GridItem xs={1} sm={1} md={1}>
+            <GridItem xs={0} sm={0} md={0}>
                 <AgregarModal parentFlatList={this} />
             </GridItem>
         </Grid>   

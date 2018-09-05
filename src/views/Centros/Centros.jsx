@@ -7,7 +7,7 @@ import GridItem from "components/Grid/GridItem.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
-import Axios from "components/Axios/Axios.jsx";
+import CentrosList from "./CentrosList.jsx";
 
 const styles = {
   cardCategoryWhite: {
@@ -52,7 +52,7 @@ function Centros(props) {
             </p>
           </CardHeader>
           <CardBody>
-            <Axios/> 
+            <CentrosList/> 
           </CardBody>
         </Card>
       </GridItem>
